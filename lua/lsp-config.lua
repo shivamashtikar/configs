@@ -84,8 +84,6 @@ if not haltLsp then
   }
 end
 
-local cwd = vim.loop.cwd()
-print(string.find(vim.loop.cwd(),'nvim'))
 --
 -- Null-ls
 --
