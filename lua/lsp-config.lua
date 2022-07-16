@@ -46,10 +46,18 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
+-- Don't attach LSP for projects in below table
+local ignoredProject = {'hyper[-]widget'}
+local cwd = vim.loop.cwd()
+local haltLsp = false
+for _, proj in ipairs(ignoredProject) do
+    haltLsp = haltLsp or string.find(cwd,proj)
+end
 -- Use a loop t conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'hie', 'bashls', 'sumneko_lua', 'vimls' , 'rust_analyzer'}
 for _, lsp in ipairs(servers) do
+  if not haltLsp then
     nvim_lsp[lsp].setup {
         capabilities = capabilities,
         on_attach = on_attach,
@@ -57,28 +65,33 @@ for _, lsp in ipairs(servers) do
             debounce_text_changes = 150,
         }
     }
+  end
 end
 
-nvim_lsp['purescriptls'].setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = {
-      debounce_text_changes = 150,
-  },
-  settings = {
-    purescript = {
-      addSpagoSources = true,
-      addNpmPath = true
+if not haltLsp then
+  nvim_lsp['purescriptls'].setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    settings = {
+      purescript = {
+        addSpagoSources = true,
+        addNpmPath = true
+      }
     }
   }
-}
+end
 
+local cwd = vim.loop.cwd()
+print(string.find(vim.loop.cwd(),'nvim'))
 --
 -- Null-ls
 --
 -- require("null-ls").setup({
     -- sources = {
-        require("null-ls").builtins.formatting.stylua,
+        -- require("null-ls").builtins.formatting.stylua,
         -- require("null-ls").builtins.diagnostics.eslint,
         -- require("null-ls").builtins.completion.spell,
         -- require('null-ls').builtins.formatting.prettier
