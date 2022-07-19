@@ -8,7 +8,9 @@ else
   echo "$PACKER_FILE already exists!"
   echo "Proceeding with setup"
 fi
- 
+
+vim -c 'PackerInstall'
+
 mkdir -p ~/.config/nvim
 ln -s $(pwd)/plugin $HOME/.config/nvim/plugin
 ln -s $(pwd)/lua $HOME/.config/nvim/lua

@@ -21,7 +21,7 @@ return require('packer').startup(function()
   use 'rhysd/git-messenger.vim'
   use 'sindrets/diffview.nvim'
 
-  use 'nvim-treesitter/nvim-treesitter'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
