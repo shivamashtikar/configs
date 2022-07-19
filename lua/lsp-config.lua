@@ -57,7 +57,7 @@ end
 -- map buffer local keybindings when the language server attaches
 local servers = { 'hie', 'bashls', 'sumneko_lua', 'vimls' , 'rust_analyzer'}
 for _, lsp in ipairs(servers) do
-  if not haltLsp then
+  -- if not haltLsp then
     nvim_lsp[lsp].setup {
         capabilities = capabilities,
         on_attach = on_attach,
@@ -65,7 +65,7 @@ for _, lsp in ipairs(servers) do
             debounce_text_changes = 150,
         }
     }
-  end
+  -- end
 end
 
 if not haltLsp then
