@@ -90,7 +90,7 @@ nmap('<Leader>bk', ':bw<CR>')
 nmap('<S-u>', '<C-r>')
 
 nmap('<leader>ur', ':%s/<C-r><C-w>//g<Left><Left>')
-nmap('<leader>ur', '"hy:%s/<C-r>h//gc<left><left><left>')
+nmap('<leader>ur', '"hy:%s/<C-r>h//gc<left><left><left>','v')
 nmap('<leader>ud', 'i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>')
 nmap('<leader>um', " :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>")
 -- Source Vim configuration file and install plugins
@@ -130,9 +130,9 @@ wkreg({
   } })
 nmap('<leader>ss', '<cmd>lua require("spectre").open()<CR>')
 nmap('<leader>sw','<cmd>lua require("spectre").open_visual({select_word=true})<CR>') --"search current word
-nmap('<leader>sv','<cmd>lua require("spectre").open_visual()<CR>')
+nmap('<leader>sv','<cmd>lua require("spectre").open_visual()<CR>','v')
 nmap('<leader>sp','viw:lua require("spectre").open_file_search()<cr>') -- "  search in current file
 
 -- Comments
 nmap('<leader>/',':Commentary<CR>')
-nmap('<leader>/',':Commentary<CR>')
+nmap('<leader>/',':Commentary<CR>', 'v')
