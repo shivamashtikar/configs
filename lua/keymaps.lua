@@ -25,11 +25,9 @@ nmap("<m-j>", "<c-w>j")
 nmap("<m-k>", "<c-w>k")
 nmap("<m-l>", "<c-w>l")
 
-nmap('<C-f>', 'J')
-nmap('J', '<c-d>zz')
-nmap('K', '<c-u>zz')
-
-nmap('<M-BS>', '<C-w>', 'i')
+-- Change split orientation
+nmap('<leader>ts', '<C-w>K') -- change vertical to horizontal
+nmap('<leader>tv', '<C-w>H') -- change horizontal to vertical
 
 -- ======== resize ========
 -- Shortcut ctrl + hjkl for to resize windows
@@ -37,8 +35,16 @@ nmap('<C-j>', ': resize -2<CR>')
 nmap('<C-k>', ': resize +2<CR>')
 nmap('<C-h>', ': vertical resize -2<CR>')
 nmap('<C-l>', ': vertical resize +2<CR>')
-nmap('<leader>=', ':wincmd =<cr>')
-nmap('<leader>-', ':MaximizerToggle<cr>')
+nmap('<leader>tb', ':wincmd =<cr>')
+nmap('<leader>tt', ':MaximizerToggle<cr>')
+
+nmap('<C-f>', 'J')
+nmap('J', '<c-d>zz')
+nmap('K', '<c-u>zz')
+
+nmap('<M-BS>', '<C-w>', 'i')
+-- Map Esc to kk
+nmap( 'jk', '<Esc>','i')
 
 nmap('>','>gv', 'v')
 nmap('<','<gv', 'v')

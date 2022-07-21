@@ -56,7 +56,7 @@ return require('packer').startup(function()
   use 'tpope/vim-commentary'
   use 'mhinz/vim-startify'
   use 'tpope/vim-obsession'
-  use 'unblevable/quick-scope'
+  -- use 'unblevable/quick-scope'
   use 'mbbill/undotree'
   use 'kristijanhusak/vim-carbon-now-sh'
   use 'junegunn/vim-slash' -- "  enhancing in-buffer searc

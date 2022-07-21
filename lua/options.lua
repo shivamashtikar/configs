@@ -58,3 +58,6 @@ opt.wildignore = opt.wildignore + "**/node_modules/**"
 -- Fix splitting
 opt.splitbelow = true
 opt.splitright = true
+
+-- automatically rebalance windows on vim resize
+cmd[[ autocmd VimResized * :wincmd = ]]
