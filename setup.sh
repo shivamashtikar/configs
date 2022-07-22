@@ -9,7 +9,7 @@ else
   echo "Proceeding with setup"
 fi
 
-vim -c 'PackerInstall'
+nvim -c 'PackerInstall'
 
 mkdir -p ~/.config/nvim
 ln -s $(pwd)/plugin $HOME/.config/nvim/plugin
