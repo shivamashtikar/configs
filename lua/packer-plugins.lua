@@ -4,7 +4,7 @@ return require('packer').startup(function()
   use "folke/which-key.nvim"
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
-  use 'nvim-telescope/telescope.nvim'
+  -- use 'nvim-telescope/telescope.nvim'
 
   use  { 'junegunn/fzf', run = './install --bin'}
   use 'junegunn/fzf.vim'
@@ -56,7 +56,7 @@ return require('packer').startup(function()
   use 'tpope/vim-commentary'
   use 'mhinz/vim-startify'
   use 'tpope/vim-obsession'
-  -- use 'unblevable/quick-scope'
+  use 'unblevable/quick-scope'
   use 'mbbill/undotree'
   use 'kristijanhusak/vim-carbon-now-sh'
   use 'junegunn/vim-slash' -- "  enhancing in-buffer searc

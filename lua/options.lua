@@ -20,7 +20,7 @@ opt.showmatch = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.incsearch = true
-opt.hidden = true
+opt.hidden = true -- Enable background buffers
 opt.mouse= "a"
 opt.modelines=0 -- Turn off modelines
 opt.linebreak = true --Avoid wrapping a line in the middle of a word
@@ -35,7 +35,7 @@ opt.scrolloff=5 -- Display 5 lines above/below the cursor when scrolling with a 
 -- opt.backspace= "indent,eol,start " -- Fixes common backspace problems
 opt.ttyfast = true -- Speed up scrolling in Vim
 opt.laststatus=3 -- Status bar
--- opt.winbar="%=%m %f"
+opt.winbar="%=%m %f"
 opt.cursorline = true --Highlight the line currently under cursor.
 -- opt.backupdir="~/.cache/vim" -- Directory to store backup files.h
 opt.confirm = true --Display a confirmation dialog when closing an unsaved file.
