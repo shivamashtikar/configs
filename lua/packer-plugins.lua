@@ -22,7 +22,7 @@ return require('packer').startup(function()
   use 'sindrets/diffview.nvim'
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'jose-elias-alvarez/null-ls.nvim'
+  -- use 'jose-elias-alvarez/null-ls.nvim'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -33,6 +33,7 @@ return require('packer').startup(function()
   use 'saadparwaiz1/cmp_luasnip'
   use 'onsails/lspkind-nvim'
   use 'folke/trouble.nvim'
+  use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   --- use 'windwp/nvim-ts-autotag'
 
   -- use 'neoclide/coc.nvim', {'branch': 'release'}
@@ -79,7 +80,7 @@ return require('packer').startup(function()
   use 'lifepillar/vim-gruvbox8'
   use 'crusoexia/vim-monokai'
   use 'ful1e5/onedark.nvim'
-  use 'kyazdani42/nvim-web-devicons' 
+  use 'kyazdani42/nvim-web-devicons'
   use 'kyazdani42/nvim-tree.lua'
   use 'nvim-lualine/lualine.nvim'
   use 'arkav/lualine-lsp-progress'

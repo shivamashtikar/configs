@@ -7,9 +7,6 @@ vim.g.maplocalleader = ","
 
 -- local exec = vim.api.nvim_exec -- execute Vimscript
 local cmd = vim.cmd -- execute Vim commands
-local g = vim.g -- global variables
-
-
 require("onedark").setup({
    comment_style = "italic",
   -- Overwrite the highlight groups

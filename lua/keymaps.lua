@@ -45,10 +45,10 @@ nmap('K', '<c-u>zz')
 
 nmap('<M-BS>', '<C-w>', 'i')
 -- Map Esc to kk
-nmap( 'jk', '<Esc>','i')
+nmap('jk', '<Esc>', 'i')
 
-nmap('>','>gv', 'v')
-nmap('<','<gv', 'v')
+nmap('>', '>gv', 'v')
+nmap('<', '<gv', 'v')
 
 -- ======== quit ========
 -- Alias write and quit to Q
@@ -79,10 +79,10 @@ nmap('<leader>qfr', ':Restore<CR>')
 nmap('<leader>qfss', ':SaveList<SPace>')
 nmap('<leader>qfsa', ':SaveListAdd<SPace>')
 
-wkreg({ w = { ':up<CR>', 'Write if changed'}})
+wkreg({ w = { ':up<CR>', 'Write if changed' } })
 
 -- B commands
-wkreg({ b ={ name = '+buffer' }})
+wkreg({ b = { name = '+buffer' } })
 nmap('<Leader>bb', ':b <C-d>')
 nmap('<Leader>bp', ':bprevious<CR>')
 nmap('<Leader>bn', ':bnext<CR>')
@@ -97,23 +97,40 @@ nmap('<Leader>bk', ':bw<CR>')
 nmap('<S-u>', '<C-r>')
 
 nmap('<leader>ur', ':%s/<C-r><C-w>//g<Left><Left>')
-nmap('<leader>ur', '"hy:%s/<C-r>h//gc<left><left><left>','v')
+nmap('<leader>ur', '"hy:%s/<C-r>h//gc<left><left><left>', 'v')
 nmap('<leader>ud', 'i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>')
 nmap('<leader>um', " :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>")
 -- Source Vim configuration file and install plugins
-nmap('<silent><leader>ui', ':source % | :PackerSync<CR>')
+nmap('<leader>ui', ':source % | :PackerSync<CR>')
 nmap('<leader>ua', ":argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>")
 
 -- session
 nmap('<Leader>us', ":exec ':Obsession ' . getcwd() . '/' . 'Session.vim'<CR>")
 nmap('<Leader>ut', ':Obsession<CR>')
 
+wkreg({
+  u = {
+    name = '+Utilities',
+    a = 'Open file with partern',
+    b = { ':let &background =  &background == "dark" ? "light" : "dark" <CR>', 'Background color toggle' },
+    c = { ':FzfLua colorschemes <CR>', 'ColorScheme' },
+    d = 'Insert date time',
+    f = { ':FzfLua filetypes <CR>', 'file types' },
+    m = 'Modify registers',
+    r = 'Replace word',
+    u = { ':FzfLua commands <CR>', 'Commands' },
+    s = 'Save Session',
+    t = 'Toggle Session',
+    w = { ':exec ":set foldlevel=0" | AnyFoldActivate <CR>', 'Activate Fold' },
+    W = { ':exec ":set foldlevel=99" <CR>', 'UnFold all' },
+  }
+})
+
 -- Moving text
 nmap('J', ":m '>+1<CR>gv=gv", 'v')
 nmap('K', ":m '<-2<CR>gv=gv", 'v')
 nmap('<C-k>', '<esc>:m .-2<CR>==i', 'i')
 nmap('<C-j>', '<esc>:m .+1<CR>==i', 'i')
-
 
 -- TmuxJump
 -- jump to file with position using filepath from sibling panes in tmux
@@ -124,7 +141,7 @@ nmap('<leader>;', ':TmuxJumpFirst<CR>')
 -- nvim-spectre
 wkreg({
   s = {
-    name='+Spectre',
+    name = '+Spectre',
     c = 'input replace cmd',
     m = 'chage result view mode',
     o = 'Option menu',
@@ -136,10 +153,10 @@ wkreg({
     w = 'Search current word',
   } })
 nmap('<leader>ss', '<cmd>lua require("spectre").open()<CR>')
-nmap('<leader>sw','<cmd>lua require("spectre").open_visual({select_word=true})<CR>') --"search current word
-nmap('<leader>sv','<cmd>lua require("spectre").open_visual()<CR>','v')
-nmap('<leader>sp','viw:lua require("spectre").open_file_search()<cr>') -- "  search in current file
+nmap('<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>') --"search current word
+nmap('<leader>sv', '<cmd>lua require("spectre").open_visual()<CR>', 'v')
+nmap('<leader>sp', 'viw:lua require("spectre").open_file_search()<cr>') -- "  search in current file
 
 -- Comments
-nmap('<leader>/',':Commentary<CR>')
-nmap('<leader>/',':Commentary<CR>', 'v')
+nmap('<leader>/', ':Commentary<CR>')
+nmap('<leader>/', ':Commentary<CR>', 'v')
