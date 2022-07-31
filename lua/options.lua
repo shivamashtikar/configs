@@ -19,7 +19,6 @@ opt.autoread = true
 opt.showmatch = true
 opt.ignorecase = true
 opt.smartcase = true
-opt.incsearch = true
 opt.hidden = true -- Enable background buffers
 opt.mouse= "a"
 opt.modelines=0 -- Turn off modelines
