@@ -31,4 +31,4 @@ require('functions')
 
 
 require("nvim-tree").setup()
-
+require("notify-scripts")

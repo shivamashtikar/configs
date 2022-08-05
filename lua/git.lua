@@ -2,14 +2,6 @@ local api = vim.api
 local opt_n = { noremap = true }
 local cmd = vim.cmd -- execute Vim commands
 local wk = require("which-key")
-local notify = require("notify")
-vim.api.nvim_create_user_command(
-  'Notify',
-  function (input)
-    notify(input.args)
-  end,
-  {bang = false}
-)
 
 local function nmap(key, value, m)
   local mode = 'n'
