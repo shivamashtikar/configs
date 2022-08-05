@@ -1,19 +1,5 @@
-local api = vim.api
-local opt_n = { noremap = true }
-local cmd = vim.cmd -- execute Vim commands
-local wk = require("which-key")
-
-local function nmap(key, value, m)
-  local mode = 'n'
-  if m then
-    mode = m
-  end
-  api.nvim_set_keymap(mode, key, value, opt_n)
-end
-
-local function wkreg(obj)
-  wk.register(obj, { prefix = "<leader>" })
-end
+local u = require('my-utils')
+local nmap = u.nmap
 
 nmap(';', ':')
 nmap(':', ';')
@@ -52,7 +38,7 @@ nmap('<', '<gv', 'v')
 
 -- ======== quit ========
 -- Alias write and quit to Q
-wkreg({
+u.wkreg({
   q = {
     name = '+quit',
     a = { ':qa<cr>', 'Quit all window' },
@@ -79,10 +65,10 @@ nmap('<leader>qfr', ':Restore<CR>')
 nmap('<leader>qfss', ':SaveList<SPace>')
 nmap('<leader>qfsa', ':SaveListAdd<SPace>')
 
-wkreg({ w = { ':up<CR>', 'Write if changed' } })
+u.wkreg({ w = { ':up<CR>', 'Write if changed' } })
 
 -- B commands
-wkreg({ b = { name = '+buffer' } })
+u.wkreg({ b = { name = '+buffer' } })
 nmap('<Leader>bb', ':b <C-d>')
 nmap('<Leader>bp', ':bprevious<CR>')
 nmap('<Leader>bn', ':bnext<CR>')
@@ -108,7 +94,7 @@ nmap('<leader>ua', ":argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>")
 nmap('<Leader>us', ":exec ':Obsession ' . getcwd() . '/' . 'Session.vim'<CR>")
 nmap('<Leader>ut', ':Obsession<CR>')
 
-wkreg({
+u.wkreg({
   u = {
     name = '+Utilities',
     a = 'Open file with partern',
@@ -139,7 +125,7 @@ nmap('<leader>ft', ':TmuxJumpFile<CR>')
 nmap('<leader>;', ':TmuxJumpFirst<CR>')
 
 -- nvim-spectre
-wkreg({
+u.wkreg({
   s = {
     name = '+Spectre',
     c = 'input replace cmd',

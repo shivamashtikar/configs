@@ -1,19 +1,6 @@
-local api = vim.api
-local opt_n = { noremap = true }
 local cmd = vim.cmd -- execute Vim commands
-local wk = require("which-key")
-
-local function nmap(key, value, m)
-  local mode = 'n'
-  if m then
-    mode = m
-  end
-  api.nvim_set_keymap(mode, key, value, opt_n)
-end
-
-local function wkreg(obj)
-  wk.register(obj, { prefix = "<leader>" })
-end
+local u = require('my-utils')
+local nmap = u.nmap
 
 cmd[[ 
 function PrevAction() abort
@@ -45,7 +32,7 @@ nmap('<leader>gij',':exe "normal! a" . matchstr(fugitive#Head(), "PICAF-[0-9]*")
 nmap('<leader>gpr',':Git pull --rebase origin/')
 nmap('<leader>gpm',':Git pull --merge origin/')
 
-wkreg({
+u.wkreg({
   g = {
   name='+git'                 ,
   a = { ':Gitsigns stage_hunk<cr>' , 'stage hunk'  } ,
@@ -67,7 +54,7 @@ wkreg({
     f = { ':GV!<cr>'                          , 'GV file commit'  } ,
     g = { ':GV<cr>'                           , 'GV commits'      } ,
     o = { ':FzfLua git_branches<cr>'           , 'Checkout branch'  } ,
-    s = { ':!git commit --amend --no-edit<cr>' , 'ammend commit'    } ,
+    s = { u.syscmd({'git', 'commit', '--amend', '--no-edit'}), 'ammend commit'    } ,
      }                                       ,
   d = {
     name = '+Diff'              ,
@@ -85,11 +72,11 @@ wkreg({
   },
   p = {
     name = '+Pcommands'        ,
-    f = { ':Git fetch<cr>'          , 'push'  } ,
+    f = { u.syscmd({'git', 'fetch' }), 'fetch'  } ,
     m = 'pull --merge origin'  ,
-    p = { ':Git pull<cr>'           , 'pull'  } ,
+    p = { u.syscmd({'git', 'pull'}) , 'pull'  } ,
     r = 'pull --rebase origin' ,
-    u = { ':Git push<cr>'           , 'push'  } ,
+    u = { u.syscmd({'git', 'push' }), 'push'  } ,
     }                            ,
   s = {
     name = '+Scommands'              ,
@@ -97,7 +84,8 @@ wkreg({
     b = { ':Gitsigns stage_buffer<cr>'    , 'stage buffer'      } ,
     h = { ':FzfLua git_stash<cr>'         , 'git stash list'    } ,
     r = { ':Gitsigns reset_buffer<cr>'    , 'reset buffer'      } ,
-    s = { ':Git stash<cr>'                , 'stash'             } ,
+    s = { u.syscmd({'git', 'stash' }), 'stash'             } ,
+    t = { u.quickGS, 'git status' },
     u = { ':Gitsigns undo_stage_hunk<cr>' , 'undo staged hunk'  } ,
     }                                  ,
   t = {
@@ -113,12 +101,12 @@ wkreg({
   --[']'] = { ':diffget //3 | diffupdate'             , 'hunk from the merge parent'   }      ,
   i = {
     name = '+advance'                   ,
-    m = { ':Git merge --continue<cr>'        , 'merge continue'     } ,
-    r = { ':Git rebase --continue<cr>'       , 'rebase continue'    } ,
-    p = { ':Git push --force<cr>'            , 'push force'         } ,
-    c = { ':Git commit -m "fast-commit"<cr>' , 'quick commit'       } ,
-    s = { ':Git rebase -i HEAD~2<cr>'        , 'squash cur commit'  } ,
-    f = { ':!git checkout -- .<cr>'          , 'flus changes'       } ,
+    m = { u.syscmd({'git', 'merge', '--continue' }), 'merge continue'     } ,
+    r = { u.syscmd({'git', 'rebase', '--continue' }), 'rebase continue'    } ,
+    p = { u.syscmd({'git', 'push', '--force' }), 'push force'         } ,
+    c = { u.syscmd({'git', 'commit', '-m', '"fast-commit"' }), 'quick commit'       } ,
+    s = { u.syscmd({'git', 'rebase', '-i', 'HEAD~2' }), 'squash cur commit'  } ,
+    f = { u.syscmd({'git','checkout', '--', '.'}), 'flus changes'       } ,
     q = 'fast squash'                   ,
     n = 'push upstream new'             ,
     g = 'reset branch'                  ,

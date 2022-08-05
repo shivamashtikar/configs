@@ -1,19 +1,5 @@
-local api = vim.api
-local opt_n = { noremap = true }
-local cmd = vim.cmd -- execute Vim commands
-local wk = require("which-key")
-
-local function nmap(key, value, m)
-  local mode = 'n'
-  if m then
-    mode = m
-  end
-  api.nvim_set_keymap(mode, key, value, opt_n)
-end
-
-local function wkreg(obj)
-  wk.register(obj, { prefix = "<leader>" })
-end
+local u = require('my-utils')
+local nmap = u.nmap
 -- --column: Show column number
 -- --line-number: Show line number
 -- --no-heading: Do not show file headings in results
@@ -48,7 +34,7 @@ nmap('<leader>fG', ':lua require("fzf-lua").live_grep({ rg_opts = vim.g.rg_grep_
 nmap('<leader>fJ', ':lua require("fzf-lua").grep_cword({ rg_opts = vim.g.rg_grep_all })<CR>')
 nmap('<leader>fS', ':lua require("fzf-lua").grep({ rg_opts = vim.g.rg_grep_all })<CR>')
 
-wkreg({
+u.wkreg({
   o = { ':FzfLua buffers<cr>' , 'Show Open buffers' },
   p = { ':FzfLua tabs<cr>' , 'Show Open Windows' },
   r = {':Ranger<cr>'  , 'Ranger'},
