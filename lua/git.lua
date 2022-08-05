@@ -2,6 +2,14 @@ local api = vim.api
 local opt_n = { noremap = true }
 local cmd = vim.cmd -- execute Vim commands
 local wk = require("which-key")
+local notify = require("notify")
+vim.api.nvim_create_user_command(
+  'Notify',
+  function (input)
+    notify(input.args)
+  end,
+  {bang = false}
+)
 
 local function nmap(key, value, m)
   local mode = 'n'
@@ -77,8 +85,12 @@ wkreg({
   g = { ':Git<cr>'               , 'Git '               } ,
   G = { ':Neogit<cr>'                   , 'Git '               } ,
   h = { ':Gitsigns preview_hunk<cr>' , 'preview hunk'       } ,
-  l = { ':Gclog<cr>'                 , 'logs'               } ,
-  L = { ':Git log --stat<cr>'        , 'logs with changes'  } ,
+  l = {
+    name = "+logs",
+    c = { ':Git log --stat<cr>'        , 'logs with changes'  } ,
+    l = { ':Gclog<cr>'                 , 'logs'               } ,
+    s = { ":Git log  --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat<cr>", "log tree with files" },
+  },
   p = {
     name = '+Pcommands'        ,
     f = { ':Git fetch<cr>'          , 'push'  } ,
