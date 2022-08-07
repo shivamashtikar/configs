@@ -62,7 +62,7 @@ exports.quickGS = function ()
     local level = vim.log.levels.INFO
     if string.find(output, "Unmerged paths") then
       level = vim.log.levels.ERROR
-    elseif string.find(output, "Changes not staged") or string.find(output, "Untracked files") then
+    elseif string.find(output, "Changes not staged") or string.find(output, "Changes to be committed") then
       level = vim.log.levels.WARN
     end
     notify(output, level, { title = " git status" })
