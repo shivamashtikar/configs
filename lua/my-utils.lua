@@ -13,6 +13,7 @@ exports.printTable = function (table )
 end
 
 exports.notifyOutput = function(command, opts)
+  notify("$ " .. table.concat(command, " "), "info", vim.tbl_extend("keep", opts or {},  { title = "Executing Command" }))
   local output = ""
   local notification
   local lnotify = function(msg, level)
