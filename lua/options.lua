@@ -60,3 +60,6 @@ opt.splitright = true
 
 -- automatically rebalance windows on vim resize
 cmd[[ autocmd VimResized * :wincmd = ]]
+
+-- Enable language support in markdown
+vim.g.markdown_fenced_languages = {"sh", "lua", "purescript", "javascript", "vim", "haskell" }
