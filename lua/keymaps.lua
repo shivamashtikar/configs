@@ -102,6 +102,7 @@ u.wkreg({
     c = { ':FzfLua colorschemes <CR>', 'ColorScheme' },
     d = 'Insert date time',
     f = { ':FzfLua filetypes <CR>', 'file types' },
+    n = {":g/^\\s*$/d<CR>", 'delete empty newlines'},
     m = 'Modify registers',
     r = 'Replace word',
     u = { ':FzfLua commands <CR>', 'Commands' },

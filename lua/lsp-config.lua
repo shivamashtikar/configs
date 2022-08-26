@@ -47,7 +47,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 -- Don't attach LSP for projects in below table
-local ignoredProject = { 'hyper[-]widget' }
+local ignoredProject = { 'hyper[-]widget', 'euler[-]ps' }
 local cwd = vim.loop.cwd()
 local haltLsp = false
 for _, proj in ipairs(ignoredProject) do

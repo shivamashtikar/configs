@@ -1,13 +1,7 @@
 #!/bin/bash
 
 PACKER_FILE=~/.local/share/nvim/site/pack/packer/start/packer.nvim
-if [[ -f $PACKER_FILE ]]
-then
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim $PACKER_FILE
-else
-  echo "$PACKER_FILE already exists!"
-  echo "Proceeding with setup"
-fi
+git clone --depth 1 https://github.com/wbthomason/packer.nvim $PACKER_FILE
 
 nvim -c 'PackerInstall'
 
