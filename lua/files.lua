@@ -36,7 +36,7 @@ nmap('<leader>fS', ':lua require("fzf-lua").grep({ rg_opts = vim.g.rg_grep_all }
 
 u.wkreg({
   o = { ':FzfLua buffers<cr>' , 'Show Open buffers' },
-  p = { ':FzfLua tabs<cr>' , 'Show Open Windows' },
+  O = { ':FzfLua tabs<cr>' , 'Show Open Windows' },
   r = {':Ranger<cr>'  , 'Ranger'},
   f = {
     name = '+file',

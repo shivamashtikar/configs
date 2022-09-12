@@ -81,6 +81,7 @@ nmap('<Leader>bk', ':bw<CR>')
 --
 -- Shift + u for redo
 nmap('<S-u>', '<C-r>')
+nmap('<leader>p', '"_dP', 'x') -- paste widout updating register
 
 nmap('<leader>ur', ':%s/<C-r><C-w>//g<Left><Left>')
 nmap('<leader>ur', '"hy:%s/<C-r>h//gc<left><left><left>', 'v')
