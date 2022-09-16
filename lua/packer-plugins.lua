@@ -89,6 +89,7 @@ return require('packer').startup({
     use 'azabiong/vim-board'
     use 'akinsho/bufferline.nvim'
     use 'rcarriga/nvim-notify'
+    use "folke/zen-mode.nvim"
 
     use 'shivamashtikar/tmuxjump.vim'
 
