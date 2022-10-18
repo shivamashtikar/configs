@@ -36,7 +36,6 @@ return require('packer').startup({
     use 'folke/trouble.nvim'
     use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
     use 'quangnguyen30192/cmp-nvim-tags'
-    use "amarakon/nvim-cmp-buffer-lines"
     --- use 'windwp/nvim-ts-autotag'
 
     -- use 'neoclide/coc.nvim', {'branch': 'release'}

@@ -165,8 +165,7 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'tags' },
-    { name = 'buffer' },
-    { name = "buffer-lines" }
+    { name = 'buffer' }
   },
 }
 
