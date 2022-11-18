@@ -63,3 +63,5 @@ cmd[[ autocmd VimResized * :wincmd = ]]
 
 -- Enable language support in markdown
 vim.g.markdown_fenced_languages = {"sh", "lua", "purescript", "javascript", "vim", "haskell" }
+
+cmd[[au BufNewFile,BufRead Jenkinsfile setf groovy]]
