@@ -26,8 +26,8 @@ nmap('<C-n>', ':call NextAction()<CR>')
 nmap('<C-p>', ':call PrevAction()<CR>')
 
 nmap('<leader>gij', ':exe "normal! a" . matchstr(fugitive#Head(), "PICAF-[0-9]*"). " "<CR>a')
-nmap('<leader>gpr', ':Git pull --rebase origin/')
-nmap('<leader>gpm', ':Git pull --merge origin/')
+nmap('<leader>gpr', ':Git pull --rebase origin ')
+nmap('<leader>gpm', ':Git pull --merge origin ')
 
 u.wkreg({
   g = {
