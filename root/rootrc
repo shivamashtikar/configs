@@ -1,0 +1,5 @@
+#!/bin/bash
+alias f='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias fz='nvim `find . | fzf --reverse --height=10`'
+alias vim=nvim
+
