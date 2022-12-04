@@ -36,6 +36,7 @@ opt.ttyfast = true -- Speed up scrolling in Vim
 opt.laststatus=3 -- Status bar
 -- opt.winbar="%=%m %f"
 opt.cursorline = true --Highlight the line currently under cursor.
+opt.cursorcolumn = true -- Highlight current column
 -- opt.backupdir="~/.cache/vim" -- Directory to store backup files.h
 opt.confirm = true --Display a confirmation dialog when closing an unsaved file.
 opt.updatetime=300
@@ -57,6 +58,8 @@ opt.wildignore = opt.wildignore + "**/node_modules/**"
 -- Fix splitting
 opt.splitbelow = true
 opt.splitright = true
+
+opt.virtualedit="all"
 
 -- automatically rebalance windows on vim resize
 cmd[[ autocmd VimResized * :wincmd = ]]
