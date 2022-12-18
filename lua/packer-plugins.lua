@@ -36,7 +36,7 @@ return require('packer').startup({
     use 'folke/trouble.nvim'
     use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
     use 'quangnguyen30192/cmp-nvim-tags'
-    use "amarakon/nvim-cmp-buffer-lines"
+    use "rafamadriz/friendly-snippets"
     --- use 'windwp/nvim-ts-autotag'
 
     -- use 'neoclide/coc.nvim', {'branch': 'release'}
@@ -57,7 +57,12 @@ return require('packer').startup({
     use 'jiangmiao/auto-pairs'
     use 'godlygeek/tabular' -- "useful to line up text.
     use 'editorconfig/editorconfig-vim'
-    use 'tpope/vim-commentary'
+    use {
+      'numToStr/Comment.nvim',
+      config = function()
+        require('Comment').setup()
+      end
+    }
     use 'mhinz/vim-startify'
     use 'tpope/vim-obsession'
     use 'unblevable/quick-scope'
@@ -91,6 +96,9 @@ return require('packer').startup({
     use 'akinsho/bufferline.nvim'
     use 'rcarriga/nvim-notify'
     use "folke/zen-mode.nvim"
+    use "shortcuts/no-neck-pain.nvim"
+    use 'p00f/nvim-ts-rainbow'
+    use 'ggandor/lightspeed.nvim'
 
     use 'shivamashtikar/tmuxjump.vim'
 

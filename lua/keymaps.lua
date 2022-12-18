@@ -145,6 +145,3 @@ nmap('<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<
 nmap('<leader>sv', '<cmd>lua require("spectre").open_visual()<CR>', 'v')
 nmap('<leader>sp', 'viw:lua require("spectre").open_file_search()<cr>') -- "  search in current file
 
--- Comments
-nmap('<leader>/', ':Commentary<CR>')
-nmap('<leader>/', ':Commentary<CR>', 'v')

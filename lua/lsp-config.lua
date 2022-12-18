@@ -166,7 +166,6 @@ cmp.setup {
     { name = 'path' },
     { name = 'tags' },
     { name = 'buffer' },
-    { name = "buffer-lines" }
   },
 }
 
