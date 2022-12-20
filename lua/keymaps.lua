@@ -93,7 +93,7 @@ nmap('<leader>ua', ":argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>")
 
 -- session
 nmap('<Leader>us', ":exec ':Obsession ' . getcwd() . '/' . 'Session.vim'<CR>")
-nmap('<Leader>ut', ':Obsession<CR>')
+nmap('<Leader>uS', ':Obsession<CR>')
 
 u.wkreg({
   u = {
@@ -108,7 +108,8 @@ u.wkreg({
     r = 'Replace word',
     u = { ':FzfLua commands <CR>', 'Commands' },
     s = 'Save Session',
-    t = 'Toggle Session',
+    S = 'Toggle Session',
+    t = { ':UndotreeToggle<cr>', 'UndoTree' },
     w = { ':exec ":set foldlevel=0" | AnyFoldActivate <CR>', 'Activate Fold' },
     W = { ':exec ":set foldlevel=99" <CR>', 'UnFold all' },
   }

@@ -58,7 +58,7 @@ u.wkreg({
       d = { ':tab Git diff<cr>', 'diff all' },
       t = { ':Gitsigns diffthis<cr>', 'diff this' },
     },
-    g = { ':Git<cr>', 'Git ' },
+    g = { ':Git|MaximizerToggle<cr>', 'Git ' },
     G = { ':Neogit<cr>', 'Git ' },
     h = { ':Gitsigns preview_hunk<cr>', 'preview hunk' },
     l = {
