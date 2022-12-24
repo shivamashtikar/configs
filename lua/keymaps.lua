@@ -146,3 +146,4 @@ nmap('<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<
 nmap('<leader>sv', '<cmd>lua require("spectre").open_visual()<CR>', 'v')
 nmap('<leader>sp', 'viw:lua require("spectre").open_file_search()<cr>') -- "  search in current file
 
+nmap('<leader>n', ':silent! NoNeckPain<CR>')
