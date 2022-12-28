@@ -98,7 +98,6 @@ return require('packer').startup({
     use "folke/zen-mode.nvim"
     use "shortcuts/no-neck-pain.nvim"
     use 'p00f/nvim-ts-rainbow'
-    use 'ggandor/lightspeed.nvim'
 
     use 'shivamashtikar/tmuxjump.vim'
 
