@@ -105,6 +105,7 @@ u.wkreg({
     f = { ':FzfLua filetypes <CR>', 'file types' },
     n = {":g/^\\s*$/d<CR>", 'delete empty newlines'},
     m = 'Modify registers',
+    j = { ':%!jq .<cr>', 'format json file' },
     r = 'Replace word',
     u = { ':FzfLua commands <CR>', 'Commands' },
     s = 'Save Session',
