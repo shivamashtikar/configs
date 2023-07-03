@@ -56,7 +56,7 @@ for _, proj in ipairs(ignoredProject) do
 end
 -- Use a loop t conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'hie', 'bashls', 'vimls', 'rust_analyzer' }
+local servers = { 'hie', 'bashls', 'vimls', 'rust_analyzer', 'pyright' }
 for _, lsp in ipairs(servers) do
   -- if not haltLsp then
   nvim_lsp[lsp].setup {

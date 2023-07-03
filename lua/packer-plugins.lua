@@ -14,7 +14,7 @@ return require('packer').startup({
 
     use 'stsewd/fzf-checkout.vim'
     use 'tpope/vim-fugitive'
-    use 'TimUntersberger/neogit'
+    use 'NeogitOrg/neogit'
     use 'lewis6991/gitsigns.nvim'
     use 'junegunn/gv.vim'
     use 'rhysd/conflict-marker.vim'
