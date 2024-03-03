@@ -47,7 +47,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 -- Don't attach LSP for projects in below table
-local ignoredProject = { 'hyper[-]widget', 'euler[-]ps' }
+local ignoredProject = { 'euler[-]ps' }
 local cwd = vim.loop.cwd()
 local haltLsp = false
 for _, proj in ipairs(ignoredProject) do
@@ -56,7 +56,7 @@ for _, proj in ipairs(ignoredProject) do
 end
 -- Use a loop t conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'hie', 'bashls', 'vimls', 'rust_analyzer', 'pyright' }
+local servers = { 'hls', 'bashls', 'vimls', 'rust_analyzer', 'pyright', 'rescriptls' }
 for _, lsp in ipairs(servers) do
   -- if not haltLsp then
   nvim_lsp[lsp].setup {

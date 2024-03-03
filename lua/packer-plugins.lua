@@ -23,6 +23,7 @@ return require('packer').startup({
     use 'sindrets/diffview.nvim'
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use  'HiPhish/nvim-ts-rainbow2'
     -- use 'jose-elias-alvarez/null-ls.nvim'
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/nvim-cmp'
@@ -50,6 +51,7 @@ return require('packer').startup({
     use 'maxmellon/vim-jsx-pretty'
     use 'pangloss/vim-javascript'
     use 'leafgarland/typescript-vim'
+    use 'rescript-lang/vim-rescript'
 
     use 'rbgrouleff/bclose.vim'
     use 'kylechui/nvim-surround'
@@ -98,6 +100,8 @@ return require('packer').startup({
     use "folke/zen-mode.nvim"
     use "shortcuts/no-neck-pain.nvim"
     use 'p00f/nvim-ts-rainbow'
+    -- use 'neovimhaskell/haskell-vim'
+    -- use 'sotte/presenting.vim'
 
     use 'shivamashtikar/tmuxjump.vim'
 

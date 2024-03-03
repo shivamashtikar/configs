@@ -27,6 +27,7 @@ require('lsp-config')
 require('git')
 require('files')
 require('purescript')
+require('rescript')
 require('functions')
 
 
