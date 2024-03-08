@@ -38,7 +38,7 @@ return require('packer').startup({
     use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
     use 'quangnguyen30192/cmp-nvim-tags'
     use "rafamadriz/friendly-snippets"
-    --- use 'windwp/nvim-ts-autotag'
+    use 'windwp/nvim-ts-autotag'
 
     -- use 'neoclide/coc.nvim', {'branch': 'release'}
     use 'vmchale/dhall-vim'
