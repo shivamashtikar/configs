@@ -29,6 +29,7 @@ require('files')
 require('purescript')
 require('rescript')
 require('functions')
+require('filetype')
 
 
 require("nvim-tree").setup()

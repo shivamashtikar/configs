@@ -71,5 +71,17 @@ exports.quickGS = function ()
   end
 end
 
+-- Sample usage
+-- set_ft_option({'c', 'c++'}, 'commentstring', '# %s')
+exports.set_ft_option = function (ft, option, value)
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = ft,
+    group = vim.api.nvim_create_augroup('FtOptions', {}),
+    desc = ('set option "%s" to "%s" for this filetype'):format(option, value),
+    callback = function()
+      vim.opt_local[option] = value
+    end
+  })
+end
 
 return exports

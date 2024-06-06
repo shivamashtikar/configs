@@ -23,8 +23,7 @@ return require('packer').startup({
     use 'sindrets/diffview.nvim'
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use  'HiPhish/nvim-ts-rainbow2'
-    -- use 'jose-elias-alvarez/null-ls.nvim'
+    use 'HiPhish/rainbow-delimiters.nvim'
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
