@@ -33,4 +33,4 @@ require('filetype')
 
 
 require("nvim-tree").setup()
-require("notify-scripts")
+-- require("notify-scripts")
