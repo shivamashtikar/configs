@@ -69,7 +69,7 @@ for _, lsp in ipairs(servers) do
   -- end
 end
 
-nvim_lsp['sumneko_lua'].setup {
+nvim_lsp['lua_ls'].setup {
   capabilities = capabilities,
   on_attach = on_attach,
   flags = {
