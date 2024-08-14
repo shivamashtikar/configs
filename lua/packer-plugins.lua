@@ -51,6 +51,7 @@ return require('packer').startup({
     use 'pangloss/vim-javascript'
     use 'leafgarland/typescript-vim'
     use 'rescript-lang/vim-rescript'
+    use 'nkrkv/nvim-treesitter-rescript'
 
     use 'rbgrouleff/bclose.vim'
     use 'kylechui/nvim-surround'
@@ -77,6 +78,16 @@ return require('packer').startup({
 
     use 'mtth/scratch.vim'
     use 'aserebryakov/vim-todo-lists'
+    use({
+        'MeanderingProgrammer/render-markdown.nvim',
+        after = { 'nvim-treesitter' },
+        -- requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+        -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+        -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+        config = function()
+            require('render-markdown').setup({})
+        end,
+    })
 
    -- " use 'vim-airline/vim-airline'
     --" use 'vim-airline/vim-airline-themes'
