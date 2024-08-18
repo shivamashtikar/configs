@@ -1,4 +1,5 @@
 local u = require('my-utils')
+local wk = require("which-key")
 local nmap = u.nmap
 
 nmap(';', ':')
@@ -38,21 +39,18 @@ nmap('<', '<gv', 'v')
 
 -- ======== quit ========
 -- Alias write and quit to Q
-u.wkreg({
-  q = {
-    name = '+quit',
-    a = { ':qa<cr>', 'Quit all window' },
-    u = { ':Bclose!<cr>', 'Quit buffer unsaved' },
-    w = { ':q<cr>', 'Quit window' },
-    q = { ':Bclose<cr>', 'Quit buffer' },
-    o = { '<C-w>o', 'Close other window' },
-    f = {
-      name = '+QuickFix',
-      e = { name = '+Execute', },
-      l = { name = '+Load', },
-      s = { name = '+Save', },
-    },
-  } })
+wk.add({
+  {'<leader>q', group= '+quit'},
+  {'<leader>qa', ':qa<cr>', desc='Quit all window' },
+  {'<leader>qu', ':Bclose!<cr>', desc='Quit buffer unsaved' },
+  {'<leader>qw', ':q<cr>', desc='Quit window' },
+  {'<leader>qq', ':Bclose<cr>', desc='Quit buffer' },
+  {'<leader>qo', '<C-w>o', desc='Close other window' },
+  {'<leader>qf', group= '+QuickFix'},
+  {'<leader>qfe', desc = '+Execute'},
+  {'<leader>qfl', desc = '+Load' },
+  {'<leader>qfs', desc = '+Save' },
+})
 nmap('<leader>qc', ':cexpr []<cr>')
 nmap('<leader>qfd', ':Reject<SPace>')
 nmap('<leader>qfll', ':LoadList<SPace>')
@@ -65,10 +63,11 @@ nmap('<leader>qfr', ':Restore<CR>')
 nmap('<leader>qfss', ':SaveList<SPace>')
 nmap('<leader>qfsa', ':SaveListAdd<SPace>')
 
-u.wkreg({ w = { ':up<CR>', 'Write if changed' } })
+wk.add({ 
+  {'<leader>w', ':up<CR>', desc='Write if changed' },
+  {'<leader>b', group='+buffer' },
+})
 
--- B commands
-u.wkreg({ b = { name = '+buffer' } })
 nmap('<Leader>bb', ':b <C-d>')
 nmap('<Leader>bp', ':bprevious<CR>')
 nmap('<Leader>bn', ':bnext<CR>')
@@ -95,25 +94,23 @@ nmap('<leader>ua', ":argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>")
 nmap('<Leader>us', ":exec ':Obsession ' . getcwd() . '/' . 'Session.vim'<CR>")
 nmap('<Leader>uS', ':Obsession<CR>')
 
-u.wkreg({
-  u = {
-    name = '+Utilities',
-    a = 'Open file with partern',
-    b = { ':let &background =  &background == "dark" ? "light" : "dark" <CR>', 'Background color toggle' },
-    c = { ':FzfLua colorschemes <CR>', 'ColorScheme' },
-    d = 'Insert date time',
-    f = { ':FzfLua filetypes <CR>', 'file types' },
-    n = {":g/^\\s*$/d<CR>", 'delete empty newlines'},
-    m = 'Modify registers',
-    j = { ':%!jq .<cr>', 'format json file' },
-    r = 'Replace word',
-    u = { ':FzfLua commands <CR>', 'Commands' },
-    s = 'Save Session',
-    S = 'Toggle Session',
-    t = { ':UndotreeToggle<cr>', 'UndoTree' },
-    w = { ':exec ":set foldlevel=0" | AnyFoldActivate <CR>', 'Activate Fold' },
-    W = { ':exec ":set foldlevel=99" <CR>', 'UnFold all' },
-  }
+wk.add({
+  {'<leader>u', group= '+Utilities'},
+  {'<leader>ua', desc='Open file with partern'},
+  {'<leader>ub', ':let &background =  &background == "dark" ? "light" : "dark" <CR>', desc='Background color toggle' },
+  {'<leader>uc', ':FzfLua colorschemes <CR>', desc='ColorScheme' },
+  {'<leader>ud', desc='Insert date time'},
+  {'<leader>uf', ':FzfLua filetypes <CR>', desc='file types' },
+  {'<leader>un',":g/^\\s*$/d<CR>", desc='delete empty newlines'},
+  {'<leader>um', desc='Modify registers'},
+  {'<leader>uj', ':%!jq .<cr>', desc='format json file' },
+  {'<leader>ur', desc='Replace word'},
+  {'<leader>uu', ':FzfLua commands <CR>', desc='Commands' },
+  {'<leader>us', desc='Save Session'},
+  {'<leader>uS', desc='Toggle Session'},
+  {'<leader>ut', ':UndotreeToggle<cr>', desc='UndoTree' },
+  {'<leader>uw', ':exec ":set foldlevel=0" | AnyFoldActivate <CR>', desc='Activate Fold' },
+  {'<leader>uW', ':exec ":set foldlevel=99" <CR>', desc='UnFold all' },
 })
 
 -- Moving text
@@ -129,19 +126,18 @@ nmap('<leader>ft', ':TmuxJumpFile<CR>')
 nmap('<leader>;', ':TmuxJumpFirst<CR>')
 
 -- nvim-spectre
-u.wkreg({
-  s = {
-    name = '+Spectre',
-    c = 'input replace cmd',
-    m = 'chage result view mode',
-    o = 'Option menu',
-    p = 'Search in current file',
-    q = 'Send to QuickFix',
-    r = 'Replace',
-    s = 'Open',
-    v = 'Open Visual',
-    w = 'Search current word',
-  } })
+wk.add({
+  {'<leader>s', group= '+Spectre'},
+  {'<leader>sc', desc='input replace cmd'},
+  {'<leader>sm', desc='chage result view mode'},
+  {'<leader>so', desc='Option menu'},
+  {'<leader>sp', desc='Search in current file'},
+  {'<leader>sq', desc='Send to QuickFix'},
+  {'<leader>sr', desc='Replace'},
+  {'<leader>ss', desc='Open'},
+  {'<leader>sv', desc='Open Visual'},
+  {'<leader>sw', desc='Search current word'},
+})
 nmap('<leader>ss', '<cmd>lua require("spectre").open()<CR>')
 nmap('<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>') --"search current word
 nmap('<leader>sv', '<cmd>lua require("spectre").open_visual()<CR>', 'v')

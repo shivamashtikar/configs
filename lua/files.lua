@@ -1,4 +1,5 @@
 local u = require('my-utils')
+local wk = require("which-key")
 local nmap = u.nmap
 -- --column: Show column number
 -- --line-number: Show line number
@@ -30,41 +31,34 @@ endfunction
 ]]
 
 vim.g.rg_grep_all = '--column --line-number --no-heading --fixed-strings --no-ignore --ignore-case --hidden --follow --glob "!.git/*" -g "!node_modules" --color "always"'
-nmap('<leader>fG', ':lua require("fzf-lua").live_grep({ rg_opts = vim.g.rg_grep_all })<CR>')
-nmap('<leader>fJ', ':lua require("fzf-lua").grep_cword({ rg_opts = vim.g.rg_grep_all })<CR>')
-nmap('<leader>fS', ':lua require("fzf-lua").grep({ rg_opts = vim.g.rg_grep_all })<CR>')
-
-u.wkreg({
-  o = { ':FzfLua buffers<cr>' , 'Show Open buffers' },
-  O = { ':FzfLua tabs<cr>' , 'Show Open Windows' },
-  r = {':Ranger<cr>'  , 'Ranger'},
-  f = {
-    name = '+file',
-    b = { ':FzfLua btags<cr>', 'current buffer tags' },
-    c = { ':FzfLua jumps<cr>', 'Jumps' },
-    e = { ':FzfLua git_status<cr>', 'Modified Files' },
-    f = { ':call PFiles()<cr>', 'Project files' },
-    --f = { ':FzfLua git_files<cr>', 'Project files' },
-    F = { ':FzfLua files<cr>', 'Files' },
-    g = { ':FzfLua live_grep<cr>', 'Live Grep' },
-    G = 'Live Grep all',
-    h = {
-      name = '+H',
-      c = { ':FzfLua command_history<cr>', 'command history' },
-      h = { ':FzfLua help_tags <cr>', 'help tags' },
-      s = { ':FzfLua search_history<cr>', 'search history' },
-      f = { ':FzfLua oldfiles<cr>', 'Previously open files' },
-    },
-    j = { ':FzfLua grep_cword<cr>', 'grep_cword' },
-    J = 'Grep cword all',
-    l = { ':FzfLua lines<cr>', 'Find in current buffer' },
-    m = { ':FzfLua marks<cr>', 'marks' },
-    M = { ':Maps<cr>', 'normal maps' },
-    r = { ':FzfLua resume<cr>', 'Resume last fzf cmd' },
-    s = { ':FzfLua grep<cr>', 'Find' },
-    T = { ':FzfLua tags<cr>', 'project tags' },
-    z = { ':FzfLua<cr>', 'FZF' },
-  },
+wk.add({
+  mode ={"n"},
+  {'<leader>o',  ':FzfLua buffers<cr>' , desc='Show Open buffers' },
+  {'<leader>O',  ':FzfLua tabs<cr>' , desc='Show Open Windows'},
+  {'<leader>r', ':Ranger<cr>'  , desc='Ranger'},
+  {'<leader>f', group='+file'},
+  {'<leader>fb', ':FzfLua btags<cr>', desc='current buffer tags' },
+  {'<leader>fc', ':FzfLua jumps<cr>', desc='Jumps' },
+  {'<leader>fe', ':FzfLua git_status<cr>', desc='Modified Files' },
+  {'<leader>ff', ':call PFiles()<cr>', desc='Project files' },
+  {'<leader>fF', ':FzfLua files<cr>', desc='Files' },
+  {'<leader>fg', ':FzfLua live_grep<cr>', desc='Live Grep' },
+  {'<leader>fj', ':FzfLua grep_cword<cr>', desc='grep_cword' },
+  {'<leader>fl', ':FzfLua lines<cr>', desc='Find in current buffer' },
+  {'<leader>fm', ':FzfLua marks<cr>', desc='marks' },
+  {'<leader>fM', ':Maps<cr>', desc='normal maps' },
+  {'<leader>fr', ':FzfLua resume<cr>', desc='Resume last fzf cmd' },
+  {'<leader>fs', ':FzfLua grep<cr>', desc='Find' },
+  {'<leader>fT', ':FzfLua tags<cr>', desc='project tags' },
+  {'<leader>fz', ':FzfLua<cr>', desc='FZF' },
+  {'<leader>fh', group='+h'},
+  {'<leader>fhc', ':FzfLua command_history<cr>', desc='command history' },
+  {'<leader>fhh', ':FzfLua help_tags <cr>', desc='help tags' },
+  {'<leader>fhs', ':FzfLua search_history<cr>', desc='search history' },
+  {'<leader>fhf', ':FzfLua oldfiles<cr>', desc='Previously open files' },
+  {'<leader>fG', ':lua require("fzf-lua").live_grep({ rg_opts = vim.g.rg_grep_all })<CR>', group= 'Live Grep all'},
+  {'<leader>fJ', ':lua require("fzf-lua").grep_cword({ rg_opts = vim.g.rg_grep_all })<CR>', group= 'Grep cword all'},
+  {'<leader>fS', ':lua require("fzf-lua").grep({ rg_opts = vim.g.rg_grep_all })<CR>', group='Grep'},
 })
 
 nmap('<leader><space>',':NvimTreeToggle<CR>')

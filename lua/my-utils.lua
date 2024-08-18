@@ -48,10 +48,6 @@ exports.nmap = function(key, value, m)
   api.nvim_set_keymap(mode, key, value, opt_n)
 end
 
-exports.wkreg = function (obj)
-  wk.register(obj, { prefix = "<leader>" })
-end
-
 exports.syscmd = function (obj, opt)
   return function ()
     exports.notifyOutput(obj, opt)
