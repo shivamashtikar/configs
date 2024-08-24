@@ -1,6 +1,9 @@
 #!/bin/bash
 set -x
 
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
+
 sudo apt install \
   neovim\
   chrome-gnome-shell\
