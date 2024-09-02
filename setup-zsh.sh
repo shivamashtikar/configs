@@ -1,6 +1,9 @@
 #!/bin/bash
 set -x
 
+echo "installing oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 echo "Linking ZSH configs"
 ln -s ~/workspace/i3-dot-files/zshrc ~/.zshrc
 ln -s ~/workspace/i3-dot-files/oh-my-zsh/custom/themes/agnoster-new-line.zsh-theme ~/.oh-my-zsh/themes/agnoster-new-line.zsh-theme
