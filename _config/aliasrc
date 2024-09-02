@@ -1,0 +1,203 @@
+#!/bin/bash
+
+
+alias vim=nvim
+
+
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export DATA=$HOME
+else
+  export DATA=/run/media/shivam/Data
+fi
+
+alias data='cd $DATA'
+alias shrinkpdf='/home/shivam/.scripts/shrinkpdf.sh'
+alias yl='youtube-dl --output "$HOME/Videos/%(title)s.%(ext)s" -f 18'
+
+function ym(){
+  youtube-dl --output $DATA/Music/"$2%(title)s.%(ext)s" \
+   --extract-audio \
+   --audio-format mp3 \
+   --add-metadata -x $1
+}
+function cheat(){
+	curl cheat.sh/$1
+}
+
+alias gog="git log  --abbrev-commit \
+  --name-status --color --graph
+  --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+
+function apy() {
+ venv_name=$1
+ activation_path=$PWD/$venv_name/bin/activate
+ . $activation_path
+}
+
+alias dpy="deactivate"
+
+alias activate_nix="sudo sysctl kernel.unprivileged_userns_clone=1"
+
+function zshtheme(){
+  sed -i "s/ZSH_THEME=.*/ZSH_THEME=\"${1}\"/g" $HOME/.zshrc
+  source $HOME/.zshrc
+}
+alias hobby='cd $DATA/hobby'
+
+alias f='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias fz='nvim `find . | fzf --reverse --height=10`'
+
+alias v='nvim'
+alias :q='exit'
+
+alias ws='cd $DATA/workspace'
+alias wsu='cd $DATA/workspace/ui-team'
+alias wsd='cd $DATA/workspace-data'
+
+
+[ -f ~/.config/sec.sh ] && source $HOME/.config/sec.sh
+
+# in order to sync packages, run this
+# sudo pacman -Fy # <- only run this once
+# following aliases will help in searching through packages and then installing it
+alias pac_search="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
+alias yay_search="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
+
+
+# opens process list with fzf and kills selected process
+function fkill() {
+  pid=$(ps -ef | \
+    sed 1d | \
+    fzf -m --preview="ps -p {2}" --preview-window=down:3 | \
+    awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    kill -"${1:-9}" "$pid"
+  fi
+}
+
+# show proces running on port and kills selected process
+function portKill(){
+  local pid=$(lsof -Pwni tcp | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:tcp]'" | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+    ks
+  fi
+}
+
+function reload(){
+  kitty @ set-colors -a $HOME/.config/kitty/theme.conf
+  clear
+  source ~/.zshrc
+}
+
+fzf-down() {
+  fzf --height 50% "$@" --border
+}
+
+# fco - checkout git branch/tag
+fco() {
+  local tags branches target
+  tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+  branches=$(
+    git branch --all | grep -v HEAD             |
+    sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+    sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+  target=$(
+    (echo "$tags"; echo "$branches") | sed '/^$/d' |
+    fzf-down --no-hscroll --reverse --ansi +m -d "\t" -n 2 -q "$*") || return
+  git checkout $(echo "$target" | awk '{print $2}')
+}
+
+fs() {
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --height 40% --reverse --query="$1" --select-1 --exit-0) &&
+  tmux switch-client -t "$session"
+}
+
+
+# GIT heart FZF
+# -------------
+
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+
+# Jumps to project directory, arg can be child of workspace directory
+function work(){
+  if [[ -n $1 ]]
+  then
+    WORKDIR="$1"
+  else
+    WORKDIR="$DATA/workspace"
+  fi
+
+  dir=$(ls -d $WORKDIR/* | \
+          fzf -m --preview="tree -L 1 -h --du {1}")
+  [[ ! -z "$dir" ]] || return
+  cd $dir
+  [ -d .git ] && return
+  work $dir
+}
+
+
+_gf() {
+  is_in_git_repo || return
+  git -c color.status=always status --short |
+  fzf-down -m --ansi --nth 2..,.. \
+    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
+  cut -c4- | sed 's/.* -> //'
+}
+
+_gb() {
+  is_in_git_repo || return
+  git branch -a --color=always | grep -v '/HEAD\s' | sort |
+  fzf-down --ansi --multi --tac --preview-window right:70% \
+    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -200' |
+  sed 's/^..//' | cut -d' ' -f1 |
+  sed 's#^remotes/##'
+}
+
+_gt() {
+  is_in_git_repo || return
+  git tag --sort -version:refname |
+  fzf-down --multi --preview-window right:70% \
+    --preview 'git show --color=always {} | head -200'
+}
+
+_gh() {
+  is_in_git_repo || return
+  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
+  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+    --header 'Press CTRL-S to toggle sort' \
+    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -200' |
+  grep -o "[a-f0-9]\{7,\}"
+}
+
+_gr() {
+  is_in_git_repo || return
+  git remote -v | awk '{print $1 "\t" $2}' | uniq |
+  fzf-down --tac \
+    --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" {1} | head -200' |
+  cut -d$'\t' -f1
+}
+
+_gs() {
+  is_in_git_repo || return
+  git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
+  cut -d: -f1
+}
+
+alias gpn='(git symbolic-ref HEAD 2>/dev/null || echo "(unnamed branch)")|cut -d/ -f3- | xargs -ro git push --set-upstream origin'
+
+alias getpass=~/.scripts/passmenu
+
+authssh(){
+  eval "$(ssh-agent -s)" && ssh-add
+}
