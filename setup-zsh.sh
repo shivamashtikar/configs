@@ -5,6 +5,7 @@ echo "installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo "Linking ZSH configs"
+ln -s $PWD/config/aliasrc $HOME/.config/aliasrc
 ln -s $PWD/zshrc ~/.zshrc
 ln -s $PWD/oh-my-zsh/custom/themes/agnoster-new-line.zsh-theme ~/.oh-my-zsh/themes/agnoster-new-line.zsh-theme
 
