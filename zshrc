@@ -77,7 +77,6 @@ plugins=(
   zsh-autosuggestions
   extract
   zsh-syntax-highlighting
-  kubectl
   cabal
 )
 
