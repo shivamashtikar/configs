@@ -112,9 +112,11 @@ source $HOME/.config/aliasrc
 # npm set prefix ~/.npm
 # export PATH="$HOME/.npm/bin:$PATH"
 # export PATH="$HOME/node_modules/.bin:$PATH"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [[ "$PWD" != *"xyne"* ]]; then 
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
 
 export PATH=$PATH:~/.cabal/bin:~/.psvm/current/bin:~/.local/bin
@@ -137,6 +139,9 @@ if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # --files: List files that would be searched but do not search
@@ -164,3 +169,11 @@ fi
 if [[ -s /usr/lib/jvm/default/bin ]]; then
   export PATH=${PATH}:/usr/lib/jvm/default/bin
 fi
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
