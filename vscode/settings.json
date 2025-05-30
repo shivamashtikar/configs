@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "One Dark Pro Darker",
+    "projectManager.git.baseFolders": [
+        "",
+        "$HOME/workspace"
+    ],
+    "editor.tabSize": 2,
+    "editor.renderWhitespace": "trailing"
+}
