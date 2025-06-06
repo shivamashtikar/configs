@@ -112,11 +112,9 @@ source $HOME/.config/aliasrc
 # npm set prefix ~/.npm
 # export PATH="$HOME/.npm/bin:$PATH"
 # export PATH="$HOME/node_modules/.bin:$PATH"
-if [[ "$PWD" != *"xyne"* ]]; then 
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 export PATH=$PATH:~/.cabal/bin:~/.psvm/current/bin:~/.local/bin
