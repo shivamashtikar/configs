@@ -2,22 +2,46 @@
 
 set -e # Exit immediately if a command exits with a non-zero status.
 
-echo "Fetching latest Neovim AppImage release information..."
+echo "Fetching latest Neovim AppImage release information from neovim-releases page..."
 
-# 1. Get the download URL for nvim.appimage using GitHub API
-# This method is generally more robust than HTML scraping.
-# It filters for assets named 'nvim.appimage' and gets its download URL.
-APPIMAGE_URL=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest | grep "browser_download_url.*nvim\.appimage" | cut -d '"' -f 4)
+RELEASES_PAGE_URL="https://github.com/neovim/neovim-releases/releases"
+# The expected filename pattern for the AppImage
+APPIMAGE_FILENAME_PATTERN="nvim-linux-x86_64.appimage" # Or a more generic "*.appimage" if this is too specific
 
-if [ -z "$APPIMAGE_URL" ]; then
-    echo "Could not find the nvim.appimage download URL from GitHub API. Exiting."
+# 1. Fetch the HTML of the releases page
+HTML_CONTENT=$(curl -sL "$RELEASES_PAGE_URL")
+
+if [ -z "$HTML_CONTENT" ]; then
+    echo "Could not fetch HTML content from $RELEASES_PAGE_URL. Exiting."
     exit 1
 fi
 
+# 2. Parse the HTML to find the download URL for the AppImage.
+# This looks for href attributes pointing to the AppImage file.
+# It takes the first match (head -n 1), assuming the latest release is listed first.
+# The grep pattern specifically looks for the AppImage within the known download path structure.
+RELATIVE_APPIMAGE_URL=$(echo "$HTML_CONTENT" | grep -o "href=\"/neovim/neovim-releases/releases/download/[^\"]*${APPIMAGE_FILENAME_PATTERN}\"" | head -n 1 | cut -d '"' -f 2)
+
+# Fallback if the specific x86_64 pattern is not found, try a more generic nvim.appimage
+if [ -z "$RELATIVE_APPIMAGE_URL" ]; then
+    echo "Did not find '${APPIMAGE_FILENAME_PATTERN}'. Trying generic 'nvim.appimage'..."
+    APPIMAGE_FILENAME_PATTERN_GENERIC="nvim.appimage"
+    RELATIVE_APPIMAGE_URL=$(echo "$HTML_CONTENT" | grep -o "href=\"/neovim/neovim-releases/releases/download/[^\"]*${APPIMAGE_FILENAME_PATTERN_GENERIC}\"" | head -n 1 | cut -d '"' -f 2)
+fi
+
+
+if [ -z "$RELATIVE_APPIMAGE_URL" ]; then
+    echo "Could not find the AppImage download URL from $RELEASES_PAGE_URL. Exiting."
+    echo "Please check the page manually for the correct download link structure."
+    exit 1
+fi
+
+APPIMAGE_URL="https://github.com${RELATIVE_APPIMAGE_URL}"
+
 echo "Found AppImage URL: $APPIMAGE_URL"
 
-# Determine filename and download path
-FILENAME=$(basename "$APPIMAGE_URL") # Should be nvim.appimage
+# Determine filename from the full URL and download path
+FILENAME=$(basename "$APPIMAGE_URL") # This will be nvim-linux-x86_64.appimage or nvim.appimage
 DOWNLOAD_DIR=$(mktemp -d) # Create a temporary directory for download
 DOWNLOAD_PATH="$DOWNLOAD_DIR/$FILENAME"
 
@@ -27,11 +51,19 @@ curl -L -o "$DOWNLOAD_PATH" "$APPIMAGE_URL"
 echo "Making $DOWNLOAD_PATH executable..."
 chmod +x "$DOWNLOAD_PATH"
 
-echo "Attempting to copy $DOWNLOAD_PATH to /usr/bin/nvim..."
-echo "This step requires sudo privileges."
-sudo mv "$DOWNLOAD_PATH" /usr/bin/nvim
+# Define the target installation path
+# Using /usr/local/bin is often preferred for manually installed binaries
+# over /usr/bin, which is typically managed by the package manager.
+INSTALL_PATH="/usr/local/bin/nvim" 
 
-echo "Neovim AppImage successfully downloaded and moved to /usr/bin/nvim."
+echo "Attempting to move $DOWNLOAD_PATH to $INSTALL_PATH..."
+echo "This step requires sudo privileges."
+# Ensure the target directory exists
+sudo mkdir -p "$(dirname "$INSTALL_PATH")"
+sudo mv "$DOWNLOAD_PATH" "$INSTALL_PATH"
+
+echo "Neovim AppImage successfully downloaded and moved to $INSTALL_PATH."
+echo "If $INSTALL_PATH is not in your PATH, you may need to add it or create a symlink."
 
 # Clean up the temporary directory
 rm -rf "$DOWNLOAD_DIR"
