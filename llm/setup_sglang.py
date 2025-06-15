@@ -10,9 +10,11 @@ VENV_NAME = "sglang_env"
 MODELS_SUBDIR = "models"
 # --- End Configuration ---
 
-SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
-VENV_PATH = SCRIPT_DIR / VENV_NAME
-MODELS_BASE_DIR = SCRIPT_DIR / MODELS_SUBDIR
+SCRIPT_DIR = pathlib.Path(__file__).resolve().parent # Keep for script context if needed
+SGLANG_INSTALL_DIR = pathlib.Path.home() / "sglang" # New base directory in HOME
+
+VENV_PATH = SGLANG_INSTALL_DIR / VENV_NAME
+MODELS_BASE_DIR = SGLANG_INSTALL_DIR / MODELS_SUBDIR
 
 # Script is intended for Linux
 if sys.platform != "linux":
@@ -65,7 +67,11 @@ def main():
     print("SGLang Python Setup Script")
     print("--------------------------------------------------")
 
-    # Create the base directory for models
+    # Ensure the main sglang installation directory exists
+    print(f"Ensuring sglang installation directory exists: {SGLANG_INSTALL_DIR}")
+    SGLANG_INSTALL_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Create the base directory for models within the sglang installation directory
     print(f"Ensuring models directory exists: {MODELS_BASE_DIR}")
     MODELS_BASE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -120,9 +126,10 @@ def main():
     print("")
     print("IMPORTANT:")
     print("To use sglang and the downloaded models:")
-    print(f"1. Navigate to the script's directory: cd {SCRIPT_DIR}")
-    print(f"2. Activate the virtual environment:")
-    print(f"   source {VENV_NAME}/bin/activate")
+    print(f"1. The sglang environment and models are installed in: {SGLANG_INSTALL_DIR}")
+    print(f"2. Activate the virtual environment: source {VENV_PATH}/bin/activate")
+    # Alternative activation if user is in SGLANG_INSTALL_DIR:
+    # print(f"   Alternatively, cd to {SGLANG_INSTALL_DIR} and run: source {VENV_NAME}/bin/activate")
     print("")
     print("Example commands to launch an sglang server (run these in a new terminal AFTER activating the venv):")
     for model_repo_id in MODELS_TO_DOWNLOAD:
