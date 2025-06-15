@@ -1,0 +1,3 @@
+[submodule "easy-tmux"]
+	path = easy-tmux
+	url = https://github.com/shivamashtikar/easy-tmux.git
