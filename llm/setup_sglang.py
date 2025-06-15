@@ -25,9 +25,6 @@ VENV_PYTHON = VENV_PATH / BIN_SUBDIR / "python"
 VENV_HF_CLI = VENV_PATH / BIN_SUBDIR / "huggingface-cli"
 
 MODELS_TO_DOWNLOAD = [
-    "Qwen/Qwen3-8B-Chat",
-    "Qwen/Qwen3-8B",
-    "Qwen/Qwen3-14B",
     "Qwen/Qwen3-32B",
     "Qwen/Qwen3-30B-A3B",
     "Qwen/Qwen3-235B-A22B",
