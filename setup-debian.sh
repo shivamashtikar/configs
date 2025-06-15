@@ -7,8 +7,8 @@ echo "Starting Debian Server Setup Script..."
 sudo apt update
 
 # --- Standard Server/CLI Packages from Debian Repositories ---
-echo "Installing standard server/CLI packages (htop, git, tmux, kitty, curl, zsh, ranger, lolcat, figlet, jq, qbittorrent, fzf, python3-pip, libnuma1)..."
-# curl is a dependency for update-nvim-appimage.sh
+echo "Installing standard server/CLI packages (htop, git, tmux, kitty, curl, zsh, ranger, lolcat, figlet, jq, qbittorrent, python3-pip, libnuma1)..."
+# curl and git are dependencies for update-nvim-appimage.sh and install-latest-fzf.sh
 # python3-pip is included for nvitop and sglang installation.
 # libnuma1 is a dependency for sglang.
 sudo apt install -y \
@@ -23,7 +23,6 @@ sudo apt install -y \
   figlet \
   jq \
   qbittorrent \
-  fzf \
   python3-pip \
   libnuma1
 
@@ -43,10 +42,23 @@ elif [ -f "../update-nvim-appimage.sh" ]; then # Check if it's in the parent dir
     echo "Neovim installation/update script finished."
 else
     echo "ERROR: update-nvim-appimage.sh not found in current directory (.) or parent directory (..)."
-    echo "Please ensure it is available and its path is correct in this script."
 fi
 echo ""
 
+# --- fzf Installation using install-latest-fzf.sh ---
+echo "Attempting to install/update fzf using install-latest-fzf.sh..."
+if [ -f "./install-latest-fzf.sh" ]; then
+    echo "Found ./install-latest-fzf.sh. Running with bash..."
+    bash ./install-latest-fzf.sh # Run as current user
+    echo "fzf installation/update script finished."
+elif [ -f "../install-latest-fzf.sh" ]; then
+    echo "Found ../install-latest-fzf.sh. Running with bash..."
+    bash ../install-latest-fzf.sh # Run as current user
+    echo "fzf installation/update script finished."
+else
+    echo "ERROR: install-latest-fzf.sh not found in current directory (.) or parent directory (..)."
+fi
+echo ""
 
 # --- Install nvitop using pip ---
 echo "Installing nvitop..."
@@ -68,7 +80,7 @@ if command -v pip3 &> /dev/null; then
     echo "INFO: This installs sglang globally. For a dedicated virtual environment and model download setup,"
     echo "      consider using the 'llm/setup_sglang.py' script if available."
 else
-    echo "ERROR: pip3 command not found, even after attempting to install python3-pip. Cannot install sglang."
+    echo "ERROR: pip3 command not found. Cannot install sglang."
 fi
 echo ""
 
