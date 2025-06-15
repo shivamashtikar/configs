@@ -14,7 +14,8 @@ SCRIPT_DIR = pathlib.Path(__file__).resolve().parent # Keep for script context i
 SGLANG_INSTALL_DIR = pathlib.Path.home() / "sglang" # New base directory in HOME
 
 VENV_PATH = SGLANG_INSTALL_DIR / VENV_NAME
-MODELS_BASE_DIR = SGLANG_INSTALL_DIR / MODELS_SUBDIR
+# MODELS_BASE_DIR is no longer needed as models go to HF cache
+# MODELS_BASE_DIR = SGLANG_INSTALL_DIR / MODELS_SUBDIR
 
 # Script is intended for Linux
 if sys.platform != "linux":
@@ -71,9 +72,8 @@ def main():
     print(f"Ensuring sglang installation directory exists: {SGLANG_INSTALL_DIR}")
     SGLANG_INSTALL_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Create the base directory for models within the sglang installation directory
-    print(f"Ensuring models directory exists: {MODELS_BASE_DIR}")
-    MODELS_BASE_DIR.mkdir(parents=True, exist_ok=True)
+    # Models will be downloaded to the default Hugging Face cache,
+    # so no need to create a custom models directory here.
 
     # Create Python virtual environment
     if VENV_PATH.exists() and (VENV_PATH / BIN_SUBDIR / "python").exists():
@@ -95,34 +95,25 @@ def main():
     print("  sudo apt-get update && sudo apt-get install -y libnuma1")
     print("This script does not perform system-level package installations.\n")
 
-    # Download Qwen models
-    print("Downloading Qwen models...")
+    # Download Qwen models to Hugging Face cache
+    print("Downloading Qwen models (will use Hugging Face cache)...")
     for model_repo_id in MODELS_TO_DOWNLOAD:
-        model_short_name = model_repo_id.split('/')[-1]
-        target_model_path = MODELS_BASE_DIR / model_short_name
-
-        if target_model_path.exists() and any(target_model_path.iterdir()):
-            print(f"Model {model_repo_id} appears to be already downloaded at {target_model_path}. Skipping.")
-        else:
-            print(f"Downloading {model_repo_id} to {target_model_path}...")
-            # Using --local-dir-use-symlinks False to ensure actual files are in target_model_path
-            run_command([
-                str(VENV_HF_CLI), "download", model_repo_id,
-                "--local-dir", str(target_model_path),
-                "--local-dir-use-symlinks", "False"
-            ], check=False) # Don't exit if a single model download fails
-            # We can add a more specific check here if needed, e.g. if the command failed but directory is empty
-            if not (target_model_path.exists() and any(target_model_path.iterdir())):
-                 print(f"Warning: Download of {model_repo_id} may have failed or resulted in an empty directory.", file=sys.stderr)
-            else:
-                print(f"{model_repo_id} downloaded (or was already present).")
+        print(f"Attempting to download/ensure {model_repo_id} is cached...")
+        # Removed --local-dir, models will go to default HF cache.
+        # huggingface-cli download handles checking if already cached.
+        run_command([
+            str(VENV_HF_CLI), "download", model_repo_id
+        ], check=False) # Don't exit if a single model download fails
+        # A more robust check would involve trying to load the model or checking cache status via API if available.
+        # For now, we assume `huggingface-cli download` handles it or errors out informatively.
+        print(f"Download attempt for {model_repo_id} finished.")
     print("Model downloads attempted.")
 
     print("\n--------------------------------------------------")
     print("Setup Potentially Complete!")
     print("--------------------------------------------------")
     print(f"Python virtual environment '{VENV_NAME}' is set up at: {VENV_PATH}")
-    print(f"Models are intended to be in: {MODELS_BASE_DIR}")
+    print(f"Models will be downloaded to and loaded from the default Hugging Face cache directory (usually ~/.cache/huggingface/hub).")
     print("")
     print("IMPORTANT:")
     print("To use sglang and the downloaded models:")
@@ -133,9 +124,8 @@ def main():
     print("")
     print("Example commands to launch an sglang server (run these in a new terminal AFTER activating the venv):")
     for model_repo_id in MODELS_TO_DOWNLOAD:
-        model_short_name = model_repo_id.split('/')[-1]
-        print(f"# For {model_short_name}:")
-        print(f"# python -m sglang.launch_server --model-path {MODELS_BASE_DIR / model_short_name} --tensor-parallel-size 4")
+        print(f"# For {model_repo_id}:")
+        print(f"# python -m sglang.launch_server --model-path {model_repo_id} --tensor-parallel-size 4")
     print("")
     print("Note on model path for Qwen3-235B-A22B vs Qwen3-335B-A22B:")
     print("Your history showed downloading 'Qwen/Qwen3-235B-A22B' but attempting to launch 'Qwen/Qwen3-335B-A22B'.")
