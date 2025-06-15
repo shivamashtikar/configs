@@ -5,5 +5,9 @@
         "$HOME/workspace"
     ],
     "editor.tabSize": 2,
-    "editor.renderWhitespace": "trailing"
+    "editor.renderWhitespace": "trailing",
+    "terminal.integrated.macOptionIsMeta": true,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "diffEditor.maxComputationTime": 0
 }
