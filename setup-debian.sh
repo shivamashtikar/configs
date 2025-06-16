@@ -15,14 +15,12 @@ sudo apt install -y \
   htop \
   git \
   tmux \
-  kitty \
   curl \
   zsh \
   ranger \
   lolcat \
   figlet \
   jq \
-  qbittorrent \
   python3-pip \
   libnuma1
 
