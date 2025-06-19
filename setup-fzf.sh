@@ -29,6 +29,25 @@ echo "Running fzf install script..."
 # or use specific flags like --key-bindings --completion --no-update-rc.
 "$FZF_DIR/install" --all
 
+# 4. Create a symbolic link for fzf in a common bin directory
+FZF_BIN_PATH="$FZF_DIR/bin/fzf"
+USER_LOCAL_BIN="$HOME/.local/bin"
+TARGET_FZF_PATH="$USER_LOCAL_BIN/fzf"
+
+echo "Ensuring $USER_LOCAL_BIN exists..."
+mkdir -p "$USER_LOCAL_BIN"
+
+echo "Creating symbolic link for fzf at $TARGET_FZF_PATH..."
+if [ -f "$FZF_BIN_PATH" ]; then
+    ln -sf "$FZF_BIN_PATH" "$TARGET_FZF_PATH"
+    echo "Symbolic link created for fzf."
+    echo "Please ensure '$USER_LOCAL_BIN' is in your PATH environment variable."
+    echo "You can add it to your shell configuration file (e.g., ~/.bashrc, ~/.zshrc) by adding:"
+    echo "export PATH=\"\$HOME/.local/bin:\$PATH\""
+else
+    echo "Error: fzf binary not found at $FZF_BIN_PATH. Skipping symlink creation."
+fi
+
 echo "fzf installation script finished."
 echo ""
 echo "Latest fzf has been installed."
