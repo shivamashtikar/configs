@@ -55,13 +55,13 @@ run_script() {
   local script_path="./${script_name}"
   
   if [ -f "$script_path" ]; then
-    echo "Running $script_name..."
-    if [ -x "$script_path" ]; then
-      "$script_path"
-      echo "$script_name finished."
-    else
-      echo "WARNING: $script_name is not executable. Skipping."
-    fi
+    echo "Running $script_name with bash..." # Updated message
+    bash "$script_path" # Changed to explicitly use bash
+    echo "$script_name finished."
+    # The check for executable permission is less critical now but can be kept for informational purposes
+    # if [ ! -x "$script_path" ]; then
+    #   echo "INFO: $script_name did not have execute permissions. Executed with bash."
+    # fi
   else
     echo "WARNING: $script_name not found. Skipping."
   fi
@@ -74,7 +74,6 @@ run_script() {
 
 echo "Running core configuration scripts..."
 run_script "setup-gitconfig.sh"
-run_script "setup-git.sh"      # Assumes this might do more than just config, like installing git
 
 echo "Running shell setup scripts..."
 run_script "setup-zsh.sh"      # Often best run early or very late

@@ -176,6 +176,9 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-if command -v direnv >/dev/null 2>&1; then
+if command -v direnv >/dev/null 2>&1 && [[ -z "$IN_NIX_SHELL" ]]; then
   eval "$(direnv hook zsh)"
 fi
+
+
+export PATH="$PATH:$HOME/Library/Python/3.9/bin"
