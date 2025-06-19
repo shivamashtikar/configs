@@ -5,7 +5,7 @@ return require('packer').startup({
     use "folke/which-key.nvim"
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
-    -- use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope.nvim'
 
     use  { 'junegunn/fzf', run = './install --bin'}
     use 'junegunn/fzf.vim'
@@ -110,6 +110,7 @@ return require('packer').startup({
     use "folke/zen-mode.nvim"
     use "shortcuts/no-neck-pain.nvim"
     use 'p00f/nvim-ts-rainbow'
+    use 'psiska/telescope-hoogle.nvim'
     -- use 'neovimhaskell/haskell-vim'
     -- use 'sotte/presenting.vim'
 

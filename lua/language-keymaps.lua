@@ -13,3 +13,6 @@ augroup abbreviation_ps
 augroup END
 ]]
 
+cmd[[
+autocmd FileType haskell nnoremap <localleader>h :Telescope hoogle list<CR>
+]]
