@@ -8,7 +8,12 @@ alias vim=nvim
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export DATA=$HOME
 else
-  export DATA=/run/media/shivam/Data
+  # Check if /run/media/shivam/Data exists
+  if [ -d "/run/media/shivam/Data" ]; then
+    export DATA=/run/media/shivam/Data
+  else
+    export DATA=$HOME
+  fi
 fi
 
 alias data='cd $DATA'
