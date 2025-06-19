@@ -4,20 +4,20 @@
 set -e
 
 # Get the directory where this script is located (should be the root of your 'configs' repo)
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname -- "$0")" && pwd -P)"
 SUBMODULE_DIR="$SCRIPT_DIR/easy-tmux"
 
 echo "Starting tmux setup using 'easy-tmux' submodule..."
 
 # 1. Ensure the submodule is initialized and up-to-date
 echo "Initializing/updating 'easy-tmux' submodule..."
-if [ -d "$SUBMODULE_DIR/.git" ]; then
+if [ -e "$SUBMODULE_DIR/.git" ]; then
     # If submodule directory exists and is a git repo, update it
     (cd "$SCRIPT_DIR" && git submodule update --init --recursive "$SUBMODULE_DIR")
 else
     # If submodule directory doesn't exist or isn't a git repo, try to init/update (might happen if cloned without --recurse-submodules)
     (cd "$SCRIPT_DIR" && git submodule update --init --recursive "$SUBMODULE_DIR")
-    if [ ! -d "$SUBMODULE_DIR/.git" ]; then
+    if [ ! -e "$SUBMODULE_DIR/.git" ]; then
         echo "Error: 'easy-tmux' submodule not found or failed to initialize at $SUBMODULE_DIR."
         echo "Please ensure it's correctly added and initialized: git submodule update --init --recursive"
         exit 1
