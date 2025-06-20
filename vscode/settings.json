@@ -1,5 +1,7 @@
 {
     "workbench.colorTheme": "One Dark Pro Darker",
+    "git.confirmSync": false,
+    "git.autofetch": true,
     "projectManager.git.baseFolders": [
         "",
         "$HOME/workspace"
@@ -9,5 +11,6 @@
     "terminal.integrated.macOptionIsMeta": true,
     "editor.unicodeHighlight.invisibleCharacters": false,
     "editor.unicodeHighlight.ambiguousCharacters": false,
+    "window.titleBarStyle": "custom",
     "diffEditor.maxComputationTime": 0
 }
