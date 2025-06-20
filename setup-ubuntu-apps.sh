@@ -26,6 +26,7 @@ sudo apt install -y \
   lolcat \
   figlet \
   jq \
+  xclip \
   qbittorrent
 echo "Standard packages installation finished."
 echo ""

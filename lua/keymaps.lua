@@ -82,8 +82,8 @@ nmap('<Leader>bk', ':bw<CR>')
 nmap('<S-u>', '<C-r>')
 nmap('<leader>p', '"_dP', 'x') -- paste widout updating register
 
-nmap('<leader>ur', ':%s/<C-r><C-w>//g<Left><Left>')
-nmap('<leader>ur', '"hy:%s/<C-r>h//gc<left><left><left>', 'v')
+nmap('<leader>ur', ':%s#<C-r><C-w>##g<Left><Left>')
+nmap('<leader>ur', '"hy:%s#<C-r>h##gc<left><left><left>', 'v')
 nmap('<leader>ud', 'i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>')
 nmap('<leader>um', " :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>")
 -- Source Vim configuration file and install plugins
