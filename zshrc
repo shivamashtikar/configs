@@ -182,3 +182,6 @@ fi
 
 
 export PATH="$PATH:$HOME/Library/Python/3.9/bin"
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
