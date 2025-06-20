@@ -140,9 +140,6 @@ if [ -f '/$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-clo
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
-
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
 # --hidden: Search hidden files and folders
