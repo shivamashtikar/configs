@@ -1,39 +1,47 @@
 #!/bin/bash
 
 # Exit on any error
-set -e
+set -ea
 
 # Get the directory where this script is located (should be the root of your 'configs' repo)
-SCRIPT_DIR="$(cd "$(dirname -- "$0")" && pwd -P)"
-SUBMODULE_DIR="$SCRIPT_DIR/easy-tmux"
+SUBMODULE_DIR="../easy-tmux"
 
-echo "Starting tmux setup using 'easy-tmux' submodule..."
+if [ ! -d "$SUBMODULE_DIR" ]; then
+  echo "Cloning 'easy-tmux' to ../easy-tmux location"
+  git clone https://github.com/shivamashtikar/easy-tmux.git $SUBMODULE_DIR
+else 
 
-# 1. Ensure the submodule is initialized and up-to-date
-echo "Initializing/updating 'easy-tmux' submodule..."
-if [ -e "$SUBMODULE_DIR/.git" ]; then
-    # If submodule directory exists and is a git repo, update it
-    (cd "$SCRIPT_DIR" && git submodule update --init --recursive "$SUBMODULE_DIR")
-else
-    # If submodule directory doesn't exist or isn't a git repo, try to init/update (might happen if cloned without --recurse-submodules)
-    (cd "$SCRIPT_DIR" && git submodule update --init --recursive "$SUBMODULE_DIR")
-    if [ ! -e "$SUBMODULE_DIR/.git" ]; then
-        echo "Error: 'easy-tmux' submodule not found or failed to initialize at $SUBMODULE_DIR."
-        echo "Please ensure it's correctly added and initialized: git submodule update --init --recursive"
-        exit 1
-    fi
+  echo "Directory ${SUBMODULE_DIR} exists" 
 fi
-echo "'easy-tmux' submodule is ready."
+
+cd $SUBMODULE_DIR
+pwd
 
 # 2. Run the setup script from within the 'easy-tmux' submodule
-if [ -f "$SUBMODULE_DIR/setup.sh" ]; then
+if  [ -f "$SUBMODULE_DIR/setup.sh" ]; then
     echo "Running setup script from 'easy-tmux' submodule..."
-    (cd "$SUBMODULE_DIR" && bash setup.sh) # Run setup.sh from within its own directory context
+    bash setup.sh # Run setup.sh from within its own directory context
     echo "'easy-tmux' setup script finished."
 else
     echo "Error: setup.sh not found in $SUBMODULE_DIR."
     exit 1
 fi
+
+
+
+
+read -p "Do you want to configure ssh remote url? (y/n): " yn
+
+
+case $yn in
+  [Yy]* )
+    git remote set-url origin git@github.com:shivamashtikar/easy-tmux.git;;
+  [Nn]* )
+    echo "Skipping remote configuration"
+    break;;
+
+  * ) echo "Please answer yes (y) or no (n).";;
+esac
 
 echo ""
 echo "Tmux setup using 'easy-tmux' submodule complete!"
