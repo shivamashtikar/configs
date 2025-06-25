@@ -51,6 +51,12 @@ curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-te
 curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-nvim-appimage-update.sh | bash
 ```
 
+### Setup Raspberry Pi
+
+```bash
+curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup_raspberry_pi.sh | bash -s "https://google.com"
+```
+
 ## Local Setup (Requires Repository Clone)
 
 These scripts depend on other configuration files, submodules, or require user interaction. To use them, you must first clone the entire repository.
@@ -122,3 +128,4 @@ This script will attempt to run all other setup scripts.
 
 ```bash
 bash setup.sh
+```

@@ -198,6 +198,9 @@ alias gpn='(git symbolic-ref HEAD 2>/dev/null || echo "(unnamed branch)")|cut -d
 
 alias getpass=~/.scripts/passmenu
 
+## SSH related
 authssh(){
   eval "$(ssh-agent -s)" && ssh-add
 }
+
+alias kssh="kitty +kitten ssh"
