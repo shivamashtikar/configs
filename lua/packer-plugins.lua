@@ -49,7 +49,7 @@ return require('packer').startup({
     use 'octol/vim-cpp-enhanced-highlight'
     use 'maxmellon/vim-jsx-pretty'
     use 'pangloss/vim-javascript'
-    use 'leafgarland/typescript-vim'
+    -- use 'leafgarland/typescript-vim'
     use 'rescript-lang/vim-rescript'
     use 'nkrkv/nvim-treesitter-rescript'
 
@@ -119,6 +119,9 @@ return require('packer').startup({
 
     -- colorscheme
     use 'gruvbox-community/gruvbox'
+
+    -- LLMs
+    use 'David-Kunz/gen.nvim'
 
   end,
   config = {
