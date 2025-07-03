@@ -1,6 +1,8 @@
 local u = require('my-utils')
 local wk = require("which-key")
 local nmap = u.nmap
+local vmap = u.vmap
+local nvmap = u.nvmap
 
 nmap(';', ':')
 nmap(':', ';')
@@ -144,3 +146,17 @@ nmap('<leader>sv', '<cmd>lua require("spectre").open_visual()<CR>', 'v')
 nmap('<leader>sp', 'viw:lua require("spectre").open_file_search()<cr>') -- "  search in current file
 
 nmap('<leader>n', ':silent! NoNeckPain<CR>')
+
+nvmap('<leader>la', ':Gen Ask<CR>')
+nvmap('<leader>ls', ':Gen Summarize<CR>')
+nmap('<leader>lcc', ':Gen Chat<CR>')
+nvmap('<leader>lch', ':Gen Change<CR>')
+nvmap('<leader>lco', ':Gen Change_Code<CR>')
+nvmap('<leader>leg', ':Gen Enhance_Grammar_Spelling<CR>')
+nvmap('<leader>lew', ':Gen Enhance_Wording<CR>')
+vmap('<leader>lec', ':Gen Make_Concise<CR>')
+vmap('<leader>lel', ':Gen Make_List<CR>')
+vmap('<leader>let', ':Gen Make_Table<CR>')
+nvmap('<leader>lee', ':Gen Enhance_Code<CR>')
+nvmap('<leader>lr', ':Gen Review_Code<CR>')
+nmap('<leader>lg', ':Gen Generate<CR>')

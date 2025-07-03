@@ -48,6 +48,19 @@ exports.nmap = function(key, value, m)
   api.nvim_set_keymap(mode, key, value, opt_n)
 end
 
+exports.vmap = function(key, value, m)
+  local mode = 'v'
+  if m then
+    mode = m
+  end
+  api.nvim_set_keymap(mode, key, value, opt_n)
+end
+
+exports.nvmap = function(key, value, m)
+  exports.nmap(key, value, m)
+  exports.vmap(key, value, m)
+end
+
 exports.syscmd = function (obj, opt)
   return function ()
     exports.notifyOutput(obj, opt)
