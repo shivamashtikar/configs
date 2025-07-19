@@ -39,6 +39,8 @@ return require('packer').startup({
     use "rafamadriz/friendly-snippets"
     use 'windwp/nvim-ts-autotag'
 
+    use 'huggingface/llm.nvim'
+
     -- use 'neoclide/coc.nvim', {'branch': 'release'}
     use 'vmchale/dhall-vim'
     -- use 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
