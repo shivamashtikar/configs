@@ -204,3 +204,14 @@ authssh(){
 }
 
 alias kssh="kitty +kitten ssh"
+
+he() {
+  local command
+  command=$(h -e)
+  if [[ -n "$command" ]]; then
+    print -z "$command"
+  fi
+}
+
+alias cssh="ssh -o ProxyCommand='cloudflared access ssh --hostname shivampc.pratikn.com'"
+alias kcssh="kitty +kitten ssh -o ProxyCommand='cloudflared access ssh --hostname shivampc.pratikn.com'"
