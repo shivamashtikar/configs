@@ -138,6 +138,7 @@ if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f '/$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
+[[ -e /usr/bin/fzf ]] && source <(fzf --zsh)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # --files: List files that would be searched but do not search
@@ -184,3 +185,13 @@ export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
 [ -s "$HOME/.config/.secrets" ] && source $HOME/.config/.secrets
+
+# Added by helper-cli
+
+he() {
+  local command
+  command=$(h -e)
+  if [[ -n "$command" ]]; then
+    print -z "$command"
+  fi
+}
