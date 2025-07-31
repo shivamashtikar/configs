@@ -184,6 +184,42 @@ export PATH="$PATH:$HOME/Library/Python/3.9/bin"
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(direnv hook zsh)"
+
+# Adding CUDA to PATH
+if [ -d "/usr/local/cuda/bin" ]; then
+    export PATH=$PATH:/usr/local/cuda/bin
+fi
+
+if [ -d "/usr/local/cuda/lib64" ]; then
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+    # Or you can add it to /etc/ld.so.conf and run ldconfig as root:
+    # echo "/usr/local/cuda-12.x/lib64" | sudo tee -a /etc/ld.so.conf
+    # sudo ldconfig
+fi
+
+if [ -d "/usr/local/cuda" ]; then
+    export CUDA_PATH=$CUDA_PATH:/usr/local/cuda
+    export CUDA_HOME=/usr/local/cuda
+fi
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/shivamashtikar/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/shivamashtikar/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/shivamashtikar/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/shivamashtikar/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 [ -s "$HOME/.config/.secrets" ] && source $HOME/.config/.secrets
 
 # Added by helper-cli
