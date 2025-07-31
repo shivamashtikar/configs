@@ -195,3 +195,6 @@ he() {
     print -z "$command"
   fi
 }
+
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
