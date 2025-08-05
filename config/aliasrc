@@ -239,7 +239,7 @@ ftmux() {
 # 14. Docker: Exec Into Container
 fdocker_exec() {
   local cid=$(docker ps --format '{{.ID}} {{.Image}} {{.Names}}' | fzf | awk '{print $1}')
-  [ -n "$cid" ] && docker exec -it "$cid" sh || echo "No container selected"
+  [ -n "$cid" ] && docker exec -it "$cid" bash || echo "No container selected"
 }
 
 # 15. Docker: Logs From Container
