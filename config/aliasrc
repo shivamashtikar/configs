@@ -215,3 +215,59 @@ he() {
 
 alias cssh="ssh -o ProxyCommand='cloudflared access ssh --hostname shivampc.pratikn.com'"
 alias kcssh="kitty +kitten ssh -o ProxyCommand='cloudflared access ssh --hostname shivampc.pratikn.com'"
+
+vf() {
+  local file
+  file=$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}') && $EDITOR "$file"
+}
+
+vgf() {
+  git ls-files | fzf | xargs $EDITOR
+}
+
+# Fuzzy Run Installed Commands
+frun() {
+  cmd=$(compgen -c | sort -u | fzf)
+  eval "$cmd"
+}
+
+# Fuzzy Attach to Tmux Session
+ftmux() {
+  tmux attach -t $(tmux ls | fzf | cut -d: -f1)
+}
+
+# 14. Docker: Exec Into Container
+fdocker_exec() {
+  local cid=$(docker ps --format '{{.ID}} {{.Image}} {{.Names}}' | fzf | awk '{print $1}')
+  [ -n "$cid" ] && docker exec -it "$cid" sh || echo "No container selected"
+}
+
+# 15. Docker: Logs From Container
+fdocker_logs() {
+  local cid=$(docker ps --format '{{.ID}} {{.Image}} {{.Names}}' | fzf | awk '{print $1}')
+  [ -n "$cid" ] && docker logs -f "$cid"
+}
+
+# 16. Docker: Stop Running Container
+fdocker_stop() {
+  local cid=$(docker ps --format '{{.ID}} {{.Image}} {{.Names}}' | fzf | awk '{print $1}')
+  [ -n "$cid" ] && docker stop "$cid"
+}
+
+# 17. Docker Compose: Select & Run Service
+fdocker_run() {
+  local service=$(docker-compose config --services | fzf)
+  [ -n "$service" ] && docker-compose run "$service" sh
+}
+
+# 18. Docker Compose: Restart Service
+fdocker_restart() {
+  local service=$(docker-compose config --services | fzf)
+  [ -n "$service" ] && docker-compose restart "$service"
+}
+
+alias fde='fdocker_exec'
+alias fdl='fdocker_logs'
+alias fds='fdocker_stop'
+alias fdr='fdocker_run'
+alias fdre='fdocker_restart'
