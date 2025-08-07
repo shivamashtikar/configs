@@ -174,9 +174,6 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-if command -v direnv >/dev/null 2>&1 && [[ -z "$IN_NIX_SHELL" ]]; then
-  eval "$(direnv hook zsh)"
-fi
 
 
 export PATH="$PATH:$HOME/Library/Python/3.9/bin"
@@ -184,8 +181,15 @@ export PATH="$PATH:$HOME/Library/Python/3.9/bin"
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(direnv hook zsh)"
+ # Source Homebrew environment only if the brew binary exists
+if [[ -d /home/linuxbrew/.linuxbrew/bin && -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+if command -v direnv >/dev/null 2>&1 && [[ -z "$IN_NIX_SHELL" ]]; then
+  eval "$(direnv hook zsh)"
+fi
+
 
 # Adding CUDA to PATH
 if [ -d "/usr/local/cuda/bin" ]; then
