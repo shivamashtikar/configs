@@ -82,6 +82,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.config/aliasrc
+source $HOME/.aliasrc
 
 # User configuration
 
@@ -128,7 +129,9 @@ export LC_ALL=en_IN.UTF-8
 export LANG=en_IN.UTF-8
 
 #fortune | cowsay | lolcat
-figlet -f ~/.fonts/figlet/Bloody "Shivam" -w 1000 | lolcat
+if command -v figlet >/dev/null 2>&1 && command -v lolcat >/dev/null 2>&1; then
+  figlet -f ~/.fonts/figlet/Bloody "Shivam" -w 1000 | lolcat
+fi
 
 alias myxargs='perl -p -e "s/\n/\0/;" | xargs -0'
 
