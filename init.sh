@@ -60,7 +60,7 @@ install_script() {
             else
                 echo -e "${RED}Invalid selection. Please try again.${NC}"
             fi
-        done
+        done < /dev/tty
     fi
 
     if [[ -z "$choice" ]]; then
