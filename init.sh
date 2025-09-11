@@ -1,16 +1,25 @@
 #!/bin/bash
 # init script
-echo "Shivam Ashtikar's init script"
+
+# Color definitions
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+echo -e "${BLUE}Shivam Ashtikar's init script${NC}"
 
 # Function to show instructions for local scripts
 local_script_instruction() {
     local script_name=$1
-    echo "This script requires cloning the repository."
+    echo -e "${YELLOW}This script requires cloning the repository.${NC}"
     echo "Please run the following commands:"
     echo
-    echo "  git clone https://github.com/shivamashtikar/configs.git"
-    echo "  cd configs"
-    echo "  bash $script_name"
+    echo -e "  ${CYAN}git clone https://github.com/shivamashtikar/configs.git${NC}"
+    echo -e "  ${CYAN}cd configs${NC}"
+    echo -e "  ${CYAN}bash $script_name${NC}"
     echo
 }
 
@@ -42,53 +51,53 @@ install_script() {
     if command -v fzf &> /dev/null; then
         choice=$(printf "%s\n" "${options[@]}" | fzf --header "Select a script to install")
     else
-        echo "fzf not found, using simple menu. For a better experience, please install fzf."
+        echo -e "${YELLOW}fzf not found, using simple menu. For a better experience, please install fzf.${NC}"
         echo "Select a script to install:"
         select opt in "${options[@]}"; do
             if [[ -n "$opt" ]]; then
                 choice=$opt
                 break
             else
-                echo "Invalid selection. Please try again."
+                echo -e "${RED}Invalid selection. Please try again.${NC}"
             fi
         done
     fi
 
     if [[ -z "$choice" ]]; then
-        echo "No script selected."
+        echo -e "${RED}No script selected.${NC}"
         return
     fi
 
     case "$choice" in
         "--- One-Liners (can be run directly) ---"|"--- Local Setup (requires repo clone) ---")
-            echo "Please select a script, not a category header. Please try again."
+            echo -e "${YELLOW}Please select a script, not a category header. Please try again.${NC}"
             ;;
         "Setup Figlet")
-            echo "Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-figlet.sh | bash"
+            echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-figlet.sh | bash${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-figlet.sh | bash
             ;;
         "Setup Fira Code Fonts (macOS)")
-            echo "Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fira-code-mac.sh | bash"
+            echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fira-code-mac.sh | bash${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fira-code-mac.sh | bash
             ;;
         "Setup Fira Code Fonts (Linux)")
-            echo "Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fira-code.sh | bash"
+            echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fira-code.sh | bash${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fira-code.sh | bash
             ;;
         "Setup fzf")
-            echo "Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fzf.sh | bash"
+            echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fzf.sh | bash${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-fzf.sh | bash
             ;;
         "Setup Git Aliases (Termux)")
-            echo "Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-termux.sh | bash"
+            echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-termux.sh | bash${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-termux.sh | bash
             ;;
         "Update Neovim AppImage")
-            echo "Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-nvim-appimage-update.sh | bash"
+            echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-nvim-appimage-update.sh | bash${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-nvim-appimage-update.sh | bash
             ;;
         "Setup Raspberry Pi")
-            echo "Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup_raspberry_pi.sh | bash -s \"https://google.com\""
+            echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup_raspberry_pi.sh | bash -s \"https://google.com\"${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup_raspberry_pi.sh | bash -s "https://google.com"
             ;;
         "Setup Debian Server") local_script_instruction "setup-debian.sh" ;; 
@@ -101,8 +110,8 @@ install_script() {
         "Setup VSCode") local_script_instruction "setup-vscode.sh" ;; 
         "Setup Zsh") local_script_instruction "setup-zsh.sh" ;; 
         "Run All Setups") local_script_instruction "setup.sh" ;; 
-        *) 
-            echo "Invalid choice."
+        *)
+            echo -e "${RED}Invalid choice.${NC}"
             ;; 
     esac
 }
