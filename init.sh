@@ -32,6 +32,7 @@ install_script() {
         "Setup Fira Code Fonts (Linux)"
         "Setup fzf"
         "Setup Git Aliases (Termux)"
+        "Setup Minimal Neovim"
         "Update Neovim AppImage"
         "Setup Raspberry Pi"
         "--- Local Setup (requires repo clone) ---"
@@ -91,6 +92,16 @@ install_script() {
         "Setup Git Aliases (Termux)")
             echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-termux.sh | bash${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-termux.sh | bash
+            ;;
+        "Setup Minimal Neovim")
+            echo -e "${GREEN}Running: git clone https://github.com/shivamashtikar/mini-nvim.git ~/.config/nvim${NC}"
+            git clone https://github.com/shivamashtikar/mini-nvim.git ~/.config/nvim
+            if ! command -v nvim &> /dev/null; then
+               echo "Adding Neovim PPA (ppa:neovim-ppa/unstable)..."
+               sudo add-apt-repository -y ppa:neovim-ppa/unstable
+               sudo apt update
+               sudo apt install -y neovim
+            fi
             ;;
         "Update Neovim AppImage")
             echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup-nvim-appimage-update.sh | bash${NC}"
