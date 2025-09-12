@@ -1,5 +1,4 @@
 local u = require('my-utils')
-local wk = require("which-key")
 local nmap = u.nmap
 local vmap = u.vmap
 local nvmap = u.nvmap
