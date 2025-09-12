@@ -1,4 +1,3 @@
-local notify = require('notify')
 local opt_n = { noremap = true }
 local api = vim.api
 
@@ -75,7 +74,7 @@ exports.quickGS = function ()
     elseif string.find(output, "Changes not staged") or string.find(output, "Changes to be committed") then
       level = vim.log.levels.WARN
     end
-    notify(output, level, { title = " git status" })
+    vim.notify(output, level, { title = " git status" })
   end
 end
 
