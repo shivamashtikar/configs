@@ -8,4 +8,5 @@ cmd[[colorscheme slate]]
 require('options')
 require('autocmds')
 require('keymaps')
+require('file')
 
