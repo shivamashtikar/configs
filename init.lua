@@ -22,6 +22,7 @@ require("onedark").setup({
 cmd[[colorscheme onedark]]
 
 require('options')
+require('autocmds')
 require('keymaps')
 require('lsp-config')
 require('git')

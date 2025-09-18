@@ -1,16 +1,8 @@
 local opt = vim.opt -- global/buffer/windows-scoped options
-local cmd = vim.cmd -- execute Vim commands
 
 opt.timeoutlen = 500
 opt.number = true
 opt.relativenumber = true
-cmd[[
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
-]]
 
 opt.clipboard = "unnamedplus"
 opt.path= opt.path +"**" -- Path current directory and sub folders
@@ -63,36 +55,5 @@ opt.splitright = true
 
 opt.virtualedit="all"
 
--- automatically rebalance windows on vim resize
-cmd[[ autocmd VimResized * :wincmd = ]]
-
 -- Enable language support in markdown
-vim.g.markdown_fenced_languages = {"sh", "lua", "purescript", "javascript", "vim", "haskell" }
-
-cmd[[au BufNewFile,BufRead Jenkinsfile setf groovy]]
-
-cmd[[augroup LargeFile
-        let g:large_file = 10485760 " 10MB
-
-        " Set options:
-        "   eventignore+=FileType (no syntax highlighting etc
-        "   assumes FileType always on)
-        "   noswapfile (save copy of file)
-        "   bufhidden=unload (save memory when other file is viewed)
-        "   buftype=nowritefile (is read-only)
-        "   undolevels=-1 (no undo possible)
-        au BufReadPre *
-                \ let f=expand("<afile>") |
-                \ if getfsize(f) > g:large_file |
-                        \ set eventignore+=FileType |
-                        \ setlocal noswapfile bufhidden=unload undolevels=-1 |
-                \ else |
-                        \ set eventignore-=FileType |
-                \ endif
-augroup END]]
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
+vim.g.markdown_fenced_languages = {"sh", "lua", "purescript", "javascript", "vim", "haskell", "bash", "python" }
