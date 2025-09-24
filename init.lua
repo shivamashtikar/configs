@@ -1,13 +1,9 @@
-require('packer-plugins')
+-- require('packer-plugins')
+require('config.lazy')
 
-require("which-key").setup{}
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
 
 -- local exec = vim.api.nvim_exec -- execute Vimscript
 local cmd = vim.cmd -- execute Vim commands
-require('onedark').load()
 require('options')
 require('autocmds')
 require('keymaps')
@@ -20,5 +16,4 @@ require('functions')
 require('filetype')
 
 
-require("nvim-tree").setup()
 -- require("notify-scripts")
