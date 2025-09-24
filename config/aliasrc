@@ -271,3 +271,5 @@ alias fdl='fdocker_logs'
 alias fds='fdocker_stop'
 alias fdr='fdocker_run'
 alias fdre='fdocker_restart'
+alias nv='NVIM_APPNAME=mini-nvim nvim'
+

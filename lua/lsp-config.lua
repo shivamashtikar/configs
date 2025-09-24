@@ -2,8 +2,6 @@ local cmp = require('cmp')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
-local nvim_lsp = require('lspconfig')
-
 --
 -- Lspconfig
 --
@@ -59,17 +57,19 @@ end
 local servers = { 'hls', 'bashls', 'vimls', 'rust_analyzer', 'pyright', 'rescriptls' }
 for _, lsp in ipairs(servers) do
   -- if not haltLsp then
-  nvim_lsp[lsp].setup {
+  vim.lsp.config(lsp, {
     capabilities = capabilities,
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     }
-  }
+  })
+
+  vim.lsp.enable(lsp)
   -- end
 end
 
-nvim_lsp['lua_ls'].setup {
+vim.lsp.config('lua_ls',{
   capabilities = capabilities,
   on_attach = on_attach,
   flags = {
@@ -83,10 +83,10 @@ nvim_lsp['lua_ls'].setup {
       },
     },
   }
-}
+})
 
 if not haltLsp then
-  nvim_lsp['purescriptls'].setup {
+  vim.lsp.config('purescriptls',{
     capabilities = capabilities,
     on_attach = on_attach,
     flags = {
@@ -98,8 +98,25 @@ if not haltLsp then
         addNpmPath = true
       }
     }
-  }
+  })
 end
+
+-- vim.lsp.enable({'lua_ls', 'purescriptls'})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client:supports_method('textDocument/completion') then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+  end,
+})
+
+vim.diagnostic.config({ 
+  virtual_text = true,
+  virtual_lines = true,
+})
+
 
 --
 -- Null-ls

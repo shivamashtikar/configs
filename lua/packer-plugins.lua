@@ -23,7 +23,7 @@ return require('packer').startup({
     use 'sindrets/diffview.nvim'
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use 'HiPhish/rainbow-delimiters.nvim'
+    -- use 'HiPhish/rainbow-delimiters.nvim'
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
@@ -34,7 +34,7 @@ return require('packer').startup({
     use 'saadparwaiz1/cmp_luasnip'
     use 'onsails/lspkind-nvim'
     use 'folke/trouble.nvim'
-    use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+    -- use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
     use 'quangnguyen30192/cmp-nvim-tags'
     use "rafamadriz/friendly-snippets"
     use 'windwp/nvim-ts-autotag'
