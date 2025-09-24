@@ -101,7 +101,7 @@ return require('packer').startup({
     use 'pseewald/vim-anyfold'
     use 'lifepillar/vim-gruvbox8'
     use 'crusoexia/vim-monokai'
-    use 'ful1e5/onedark.nvim'
+    use 'navarasu/onedark.nvim'
     use 'kyazdani42/nvim-web-devicons'
     use 'kyazdani42/nvim-tree.lua'
     use 'nvim-lualine/lualine.nvim'
