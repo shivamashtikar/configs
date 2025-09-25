@@ -10,11 +10,8 @@ local luasnip = require('luasnip')
 -- the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-  -- Mappings
   local opts = { noremap = true, silent = true }
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', '<localleader>gg', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', '<localleader>d', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', '<localleader>,', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -27,12 +24,16 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<localleader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<localleader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', '<localleader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<localleader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '<localleader>[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<localleader>]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<localleader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<localleader>F', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('v', '<localleader>F', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+  -- Updated diagnostic mappings using vim.diagnostic
+  buf_set_keymap('n', '<localleader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '<localleader>[', '<cmd>lua vim.diagnostic.jump({ float = true, count =-1 })<CR>', opts)
+  buf_set_keymap('n', '<localleader>]', '<cmd>lua vim.diagnostic.jump({ float = true, count=1 })<CR>', opts)
+  buf_set_keymap('n', '<localleader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+  buf_set_keymap('n', '<localleader>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
+  buf_set_keymap('v', '<localleader>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
+
 
   -- Disable Autoformat
   client.server_capabilities.document_formatting = false
@@ -49,14 +50,13 @@ local ignoredProject = { 'euler[-]ps' }
 local cwd = vim.loop.cwd()
 local haltLsp = false
 for _, proj in ipairs(ignoredProject) do
----@diagnostic disable-next-line: cast-local-type
+  ---@diagnostic disable-next-line: cast-local-type
   haltLsp = haltLsp or string.find(cwd, proj)
 end
 -- Use a loop t conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'hls', 'bashls', 'vimls', 'rust_analyzer', 'pyright', 'rescriptls' }
 for _, lsp in ipairs(servers) do
-  -- if not haltLsp then
   vim.lsp.config(lsp, {
     capabilities = capabilities,
     on_attach = on_attach,
@@ -64,12 +64,9 @@ for _, lsp in ipairs(servers) do
       debounce_text_changes = 150,
     }
   })
-
-  vim.lsp.enable(lsp)
-  -- end
 end
 
-vim.lsp.config('lua_ls',{
+vim.lsp.config('lua_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
   flags = {
@@ -86,7 +83,7 @@ vim.lsp.config('lua_ls',{
 })
 
 if not haltLsp then
-  vim.lsp.config('purescriptls',{
+  vim.lsp.config('purescriptls', {
     capabilities = capabilities,
     on_attach = on_attach,
     flags = {
@@ -101,7 +98,8 @@ if not haltLsp then
   })
 end
 
--- vim.lsp.enable({'lua_ls', 'purescriptls'})
+vim.lsp.enable({ 'lua_ls', 'purescriptls' })
+vim.lsp.enable(servers)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
@@ -112,23 +110,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.diagnostic.config({ 
+vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = true,
 })
 
-
---
--- Null-ls
---
--- require("null-ls").setup({
--- sources = {
--- require("null-ls").builtins.formatting.stylua,
--- require("null-ls").builtins.diagnostics.eslint,
--- require("null-ls").builtins.completion.spell,
--- require('null-ls').builtins.formatting.prettier
--- },
--- })
 
 --
 -- Nvim-cmp
@@ -215,4 +201,3 @@ for type, icon in pairs(signs) do
 end
 
 require("trouble").setup {}
-

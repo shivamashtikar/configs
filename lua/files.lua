@@ -35,7 +35,7 @@ wk.add({
   mode ={"n"},
   {'<leader>o',  ':FzfLua buffers<cr>' , desc='Show Open buffers' },
   {'<leader>O',  ':FzfLua tabs<cr>' , desc='Show Open Windows'},
-  {'<leader>r', ':Ranger<cr>'  , desc='Ranger'},
+  {'<leader>r', ':lua require("ranger-nvim").open(true)<cr>'  , desc='Ranger'},
   {'<leader>f', group='+file'},
   {'<leader>fb', ':FzfLua btags<cr>', desc='current buffer tags' },
   {'<leader>fc', ':FzfLua jumps<cr>', desc='Jumps' },
