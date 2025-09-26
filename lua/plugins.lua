@@ -12,7 +12,60 @@ return {
   { "nvim-lua/plenary.nvim" },
 
   -- telescope
-  { "nvim-telescope/telescope.nvim", cmd = "Telescope",                 dependencies = { "nvim-lua/plenary.nvim" } },
+  {
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("telescope").setup {
+        defaults = {
+          layout_strategy = "vertical",
+          layout_config = {
+            vertical = {
+              width = 0.99,
+              height = 0.99,
+              preview_height = 0.6,
+              preview_cutoff = 40,
+              mirror = false,
+            }
+          },
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",
+            "--follow",
+            "--glob=!.git/*",
+            "--glob=!node_modules/*",
+            "--glob=!*.log",
+            "--glob=!*.lock",
+            "--glob=!dist/*",
+            "--glob=!build/*",
+          },
+        },
+        pickers = {
+          find_files = {
+            find_command = {
+              "rg",
+              "--files",
+              "--hidden",
+              "--follow",
+              "--glob=!.git/*",
+              "--glob=!node_modules/*",
+              "--glob=!*.log",
+              "--glob=!*.lock",
+              "--glob=!dist/*",
+              "--glob=!build/*",
+            },
+          },
+        }
+      }
+    end
+  },
 
   -- fzf
   { "junegunn/fzf",                  build = "./install --bin" },
@@ -47,6 +100,13 @@ return {
   -- git
   { "stsewd/fzf-checkout.vim", cmd = "Checkout" },
   { "tpope/vim-fugitive" },
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = "LazyGit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
   {
     "NeogitOrg/neogit",
     cmd = "Neogit",
