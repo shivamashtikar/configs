@@ -272,4 +272,26 @@ alias fds='fdocker_stop'
 alias fdr='fdocker_run'
 alias fdre='fdocker_restart'
 alias nv='NVIM_APPNAME=mini-nvim nvim'
+alias dps='docker ps'
+alias dex='docker exec -it'
+alias dl='docker logs -f --tail 200'
 
+alias gc='git commit --verbose'
+alias gco='git checkout'
+alias ls='ls -G'
+alias gcp='git cherry-pick'
+alias ga='git add'
+alias md='mkdir -p'
+alias gp='git push'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}'
+alias gl='git pull'
+alias gst='git status'
+alias glo='git log --oneline --decorate'
+
+# Encrypt 
+# encrypt "text to encrypt" "secret"
+encrypt() { echo "$1" | openssl enc -aes-256-cbc -a -salt -pbkdf2 -pass pass:"$2"; }
+
+# Decrypt
+# decrypt "text to decrypt" "secret"
+decrypt() { echo "$1" | openssl enc -aes-256-cbc -a -d -pbkdf2 -pass pass:"$2"; }

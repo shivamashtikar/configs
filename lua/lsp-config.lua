@@ -192,12 +192,20 @@ cmp.setup.cmdline(':', {
 -- Diagnostics
 --
 
--- Set diganostic sign icons
+-- Set diagnostic sign icons using the new API with FiraCode ligatures
 -- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#change-diagnostic-symbols-in-the-sign-column-gutter
-local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+vim.diagnostic.config({
+  virtual_text = true,
+  virtual_lines = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = signs.Error,
+      [vim.diagnostic.severity.WARN] = signs.Warning,
+      [vim.diagnostic.severity.HINT] = signs.Hint,
+      [vim.diagnostic.severity.INFO] = signs.Information,
+    }
+  }
+})
 
 require("trouble").setup {}

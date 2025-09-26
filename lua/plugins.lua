@@ -9,11 +9,10 @@ return {
   },
 
   -- dependencies
-  { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
 
   -- telescope
-  { "nvim-telescope/telescope.nvim", cmd = "Telescope",                 dependencies = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" } },
+  { "nvim-telescope/telescope.nvim", cmd = "Telescope",                 dependencies = { "nvim-lua/plenary.nvim" } },
 
   -- fzf
   { "junegunn/fzf",                  build = "./install --bin" },
@@ -43,10 +42,10 @@ return {
   },
 
   -- ranger
-  { "kelly-lin/ranger.nvim",  },
+  { "kelly-lin/ranger.nvim", },
 
   -- git
-  { "stsewd/fzf-checkout.vim",   cmd = "Checkout" },
+  { "stsewd/fzf-checkout.vim", cmd = "Checkout" },
   { "tpope/vim-fugitive" },
   {
     "NeogitOrg/neogit",
@@ -151,8 +150,6 @@ return {
   { "LnL7/vim-nix",                     ft = "nix" },
   { "mtdl9/vim-log-highlighting",       ft = "log" },
   { "octol/vim-cpp-enhanced-highlight", ft = { "c", "cpp" } },
-  { "maxmellon/vim-jsx-pretty",         ft = "jsx" },
-  { "pangloss/vim-javascript",          ft = "javascript" },
   { "rescript-lang/vim-rescript",       ft = "rescript" },
   { "nkrkv/nvim-treesitter-rescript",   dependencies = "nvim-treesitter" },
   {
@@ -163,7 +160,7 @@ return {
 
 
   -- utils
-  { "rbgrouleff/bclose.vim",        cmd = "Bclose" },
+  { "rbgrouleff/bclose.vim", cmd = "Bclose" },
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
@@ -171,8 +168,33 @@ return {
       require("nvim-surround").setup()
     end
   },
-  { "tpope/vim-abolish",            cmd = "Abolish" },
-  { "jiangmiao/auto-pairs",         event = "InsertEnter" },
+  { "tpope/vim-abolish",     cmd = "Abolish" },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({
+        check_ts = true,
+        ts_config = {
+          lua = { "string", "source" },
+          javascript = { "string", "template_string" },
+          java = false,
+        },
+        disable_filetype = { "TelescopePrompt", "spectre_panel" },
+        fast_wrap = {
+          map = '<M-e>',
+          chars = { '{', '[', '(', '"', "'" },
+          pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], '%s+', ''),
+          offset = 0,
+          end_key = '$',
+          keys = 'qwertyuiopzxcvbnmasdfghjkl',
+          check_comma = true,
+          highlight = 'PmenuSel',
+          highlight_grey = 'LineNr'
+        },
+      })
+    end
+  },
   { "godlygeek/tabular",            cmd = "Tabularize" },
   { "editorconfig/editorconfig-vim" },
   {
@@ -199,7 +221,18 @@ return {
     end
   },
   { "tpope/vim-obsession" },
-  { "unblevable/quick-scope",           event = "VeryLazy" },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+  },
   { "mbbill/undotree",                  cmd = "UndotreeToggle" },
   { "kristijanhusak/vim-carbon-now-sh", cmd = "CarbonNowSh" },
   { "junegunn/vim-slash",               event = "VeryLazy" },
@@ -291,9 +324,9 @@ return {
       theme = "onedark",
     }
   },
-  { "arkav/lualine-lsp-progress" },
-  { "azabiong/vim-board",        event = "VeryLazy" },
-  { 'akinsho/bufferline.nvim',   version = "*",     dependencies = 'nvim-tree/nvim-web-devicons' },
+  { "j-hui/fidget.nvim" },
+  { "azabiong/vim-board",      event = "VeryLazy" },
+  { 'akinsho/bufferline.nvim', version = "*",     dependencies = 'nvim-tree/nvim-web-devicons' },
   {
     "rcarriga/nvim-notify",
     lazy = false,
@@ -301,12 +334,12 @@ return {
       vim.notify = require("notify")
     end
   },
-  { "folke/zen-mode.nvim",          cmd = "ZenMode" },
-  { "shortcuts/no-neck-pain.nvim",  cmd = "NoNeckPain" },
-  { "p00f/nvim-ts-rainbow",         dependencies = "nvim-treesitter" },
-  { "psiska/telescope-hoogle.nvim", ft = "haskell",                  dependencies = "telescope.nvim" },
-  { "shivamashtikar/tmuxjump.vim",  cmd = "TmuxJumpFile" },
+  { "folke/zen-mode.nvim",            cmd = "ZenMode" },
+  { "shortcuts/no-neck-pain.nvim",    cmd = "NoNeckPain" },
+  { "HiPhish/rainbow-delimiters.nvim" },
+  { "psiska/telescope-hoogle.nvim",   ft = "haskell",      dependencies = "telescope.nvim" },
+  { "shivamashtikar/tmuxjump.vim",    cmd = "TmuxJumpFile" },
 
   -- colorscheme
-  { "gruvbox-community/gruvbox",    lazy = true },
+  { "gruvbox-community/gruvbox",      lazy = true },
 }
