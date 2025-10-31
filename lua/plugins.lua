@@ -68,8 +68,8 @@ return {
   },
 
   -- fzf
-  { "junegunn/fzf",                  build = "./install --bin" },
-  { "junegunn/fzf.vim",              cmd = { "FZF", "Find", "FindAll" } },
+  { "junegunn/fzf",         build = "./install --bin" },
+  { "junegunn/fzf.vim",     cmd = { "FZF", "Find", "FindAll" } },
   {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-lua/plenary.nvim" },

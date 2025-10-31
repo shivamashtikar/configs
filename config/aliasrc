@@ -295,3 +295,13 @@ encrypt() { echo "$1" | openssl enc -aes-256-cbc -a -salt -pbkdf2 -pass pass:"$2
 # Decrypt
 # decrypt "text to decrypt" "secret"
 decrypt() { echo "$1" | openssl enc -aes-256-cbc -a -d -pbkdf2 -pass pass:"$2"; }
+
+
+function t(){
+  SESSION=$(tmux ls | fzf | cut -d: -f1)
+  if [[ -n "$SESSION" ]]; then
+    tmux a -t$SESSION
+  else
+    tmux 
+  fi
+}
