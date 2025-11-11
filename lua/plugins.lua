@@ -386,7 +386,18 @@ return {
   },
   { "j-hui/fidget.nvim" },
   { "azabiong/vim-board",      event = "VeryLazy" },
-  { 'akinsho/bufferline.nvim', version = "*",     dependencies = 'nvim-tree/nvim-web-devicons' },
+  { 'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function ()
+      require("bufferline").setup ({
+        options = {
+          separator_style = "slope",
+          diagnostics = "nvim_lsp" | "coc",
+        }
+      })
+    end
+  },
   {
     "rcarriga/nvim-notify",
     lazy = false,
