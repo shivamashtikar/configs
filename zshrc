@@ -237,3 +237,6 @@ he() {
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
+
+# opencode
+export PATH=/Users/shivam/.opencode/bin:$PATH

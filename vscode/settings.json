@@ -1,5 +1,4 @@
 {
-    "workbench.colorTheme": "One Dark Pro Darker",
     "git.confirmSync": false,
     "git.autofetch": true,
     "projectManager.git.baseFolders": [
@@ -13,10 +12,6 @@
     "editor.unicodeHighlight.ambiguousCharacters": false,
     "window.titleBarStyle": "custom",
     "diffEditor.maxComputationTime": 0,
-    "roo-cline.allowedCommands": [
-        "*"
-    ],
     "security.workspace.trust.untrustedFiles": "open",
-    "roo-cline.deniedCommands": [],
-    "github.copilot.nextEditSuggestions.enabled": true
+    "workbench.colorTheme": "One Dark Pro Darker",
 }

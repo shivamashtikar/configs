@@ -150,8 +150,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("nvim-treesitter.configs").setup({
+    opts = {
         highlight = { enable = true },
         indent = { enable = true },
         ensure_installed = {
@@ -170,8 +169,7 @@ return {
           "markdown",
           "markdown_inline",
         },
-      })
-    end,
+      },
   },
   -- lsp, cmp
   { "neovim/nvim-lspconfig" },
@@ -211,7 +209,7 @@ return {
   { "mtdl9/vim-log-highlighting",       ft = "log" },
   { "octol/vim-cpp-enhanced-highlight", ft = { "c", "cpp" } },
   { "rescript-lang/vim-rescript",       ft = "rescript" },
-  { "nkrkv/nvim-treesitter-rescript",   dependencies = "nvim-treesitter" },
+  { "nkrkv/nvim-treesitter-rescript",   dependencies = "nvim-treesitter" , ft = "rescript" },
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
