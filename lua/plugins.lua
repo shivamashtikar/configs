@@ -151,25 +151,25 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-        highlight = { enable = true },
-        indent = { enable = true },
-        ensure_installed = {
-          "c",
-          "lua",
-          "rust",
-          "javascript",
-          "typescript",
-          "json",
-          "bash",
-          "haskell",
-          "groovy",
-          "cpp",
-          "nix",
-          "go",
-          "markdown",
-          "markdown_inline",
-        },
+      highlight = { enable = true },
+      indent = { enable = true },
+      ensure_installed = {
+        "c",
+        "lua",
+        "rust",
+        "javascript",
+        "typescript",
+        "json",
+        "bash",
+        "haskell",
+        "groovy",
+        "cpp",
+        "nix",
+        "go",
+        "markdown",
+        "markdown_inline",
       },
+    },
   },
   -- lsp, cmp
   { "neovim/nvim-lspconfig" },
@@ -209,7 +209,7 @@ return {
   { "mtdl9/vim-log-highlighting",       ft = "log" },
   { "octol/vim-cpp-enhanced-highlight", ft = { "c", "cpp" } },
   { "rescript-lang/vim-rescript",       ft = "rescript" },
-  { "nkrkv/nvim-treesitter-rescript",   dependencies = "nvim-treesitter" , ft = "rescript" },
+  { "nkrkv/nvim-treesitter-rescript",   dependencies = "nvim-treesitter", ft = "rescript" },
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
@@ -380,15 +380,21 @@ return {
     event = "VeryLazy",
     opts = {
       theme = "onedark",
+      sections = {
+        lualine_c = {
+          { "filename", path = 1 }
+        }
+      }
     }
   },
   { "j-hui/fidget.nvim" },
-  { "azabiong/vim-board",      event = "VeryLazy" },
-  { 'akinsho/bufferline.nvim',
+  { "azabiong/vim-board", event = "VeryLazy" },
+  {
+    'akinsho/bufferline.nvim',
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function ()
-      require("bufferline").setup ({
+    config = function()
+      require("bufferline").setup({
         options = {
           separator_style = "slope",
         }
