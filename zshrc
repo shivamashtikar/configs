@@ -227,7 +227,7 @@ unset __conda_setup
 
 # Added by helper-cli
 
-he() {
+function he() {
   local command
   command=$(h -e)
   if [[ -n "$command" ]]; then
@@ -240,3 +240,9 @@ export PATH=$GOPATH/bin:$PATH
 
 # opencode
 export PATH=/Users/shivam/.opencode/bin:$PATH
+
+export TERM=xterm-kitty
+export PATH="/opt/homebrew/opt/imagemagick-full/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/imagemagick-full/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/imagemagick-full/include"
+
