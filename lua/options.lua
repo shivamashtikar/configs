@@ -56,4 +56,4 @@ opt.splitright = true
 opt.virtualedit="all"
 
 -- Enable language support in markdown
-vim.g.markdown_fenced_languages = {"sh", "lua", "purescript", "javascript", "vim", "haskell", "bash", "python" }
+vim.g.markdown_fenced_languages = {"sh", "lua", "javascript", "vim", "haskell", "bash", "python" }
