@@ -1,0 +1,47 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "icon_theme": "Material Icon Theme",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "vim_mode": true,
+  "terminal": {
+    "option_as_meta": true,
+    "font_family": "FiraCode Nerd Font Mono",
+    "blinking": "on",
+    "working_directory": "current_file_directory",
+    "env": {
+      "EDITOR": "zed --wait",
+    },
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "relative_line_numbers": "wrapped",
+  "vim": {
+    "highlight_on_yank_duration": 100,
+    "toggle_relative_line_numbers": true,
+  },
+  "base_keymap": "VSCode",
+  "show_whitespaces": "trailing",
+  "tab_size": 2,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark Pro",
+  },
+}

@@ -1,0 +1,47 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "space o": "file_finder::Toggle",
+      "space w": "workspace::Save",
+      "space q": "pane::CloseActiveItem",
+      "space tab": "pane::AlternateFile",
+      "shift-j": "vim::PageDown",
+      "shift-k": "vim::PageUp",
+      "ctrl-f": "vim::JoinLines",
+      "shift-u": "vim::Redo",
+      "space space": "project_panel::Toggle",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-n": "workspace::NewTerminal",
+    },
+  },
+  {
+    "context": "Dock|| (VimControl && !menu)",
+    "bindings": {
+      "alt-h": "workspace::ActivatePaneLeft",
+      "alt-l": "workspace::ActivatePaneRight",
+      "alt-k": "workspace::ActivatePaneUp",
+      "alt-j": "workspace::ActivatePaneDown",
+      "alt-q": "workspace::CloseActiveDock",
+      "cmd-g": "git_panel::Toggle",
+      "cmd-b": "project_panel::Toggle",
+    },
+  },
+  {
+    "context": "",
+    "bindings": {
+      "alt-f": "workspace::ToggleZoom",
+    },
+  },
+]
