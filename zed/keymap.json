@@ -7,7 +7,7 @@
 // from the command palette.
 [
   {
-    "context": "(VimControl && !menu)",
+    "context": "vim_operator == none && !VimWaiting && vim_mode != insert && !Terminal && mode != single_line",
     "bindings": {
       "space o": "file_finder::Toggle",
       "space w": "workspace::Save",
@@ -18,6 +18,11 @@
       "ctrl-f": "vim::JoinLines",
       "shift-u": "vim::Redo",
       "space space": "project_panel::Toggle",
+      "space g c o": "git::CheckoutBranch",
+      "space g c c": "git::Commit",
+      "space g p p": "git::Pull",
+      "space g p r": "git::PullRebase",
+      "space g p u": "git::Push",
     },
   },
   {
@@ -34,8 +39,11 @@
       "alt-k": "workspace::ActivatePaneUp",
       "alt-j": "workspace::ActivatePaneDown",
       "alt-q": "workspace::CloseActiveDock",
+      "alt-`": "terminal_panel::Toggle",
+      "alt-g": "git_panel::Toggle",
       "cmd-g": "git_panel::Toggle",
       "cmd-b": "project_panel::Toggle",
+      "cmd-q": "workspace::CloseWindow",
     },
   },
   {

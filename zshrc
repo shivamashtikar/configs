@@ -238,11 +238,9 @@ function he() {
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 
-# opencode
-export PATH=/Users/shivam/.opencode/bin:$PATH
-
-export TERM=xterm-kitty
+# export TERM=xterm-kitty
 export PATH="/opt/homebrew/opt/imagemagick-full/bin:$PATH"
 # export LDFLAGS="-L/opt/homebrew/opt/imagemagick-full/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/imagemagick-full/include"
 
+export PATH=$HOME/.opencode/bin:$PATH

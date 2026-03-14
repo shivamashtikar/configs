@@ -3,7 +3,7 @@ require('config.lazy')
 
 
 -- local exec = vim.api.nvim_exec -- execute Vimscript
-local cmd = vim.cmd -- execute Vim commands
+-- local cmd = vim.cmd -- execute Vim commands
 require('options')
 require('autocmds')
 require('keymaps')
