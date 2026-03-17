@@ -35,6 +35,7 @@ install_script() {
         "Setup Minimal Neovim"
         "Update Neovim AppImage"
         "Setup Raspberry Pi"
+        "Setup Tmux (Vanila Config)"
         "--- Local Setup (requires repo clone) ---"
         "Setup Debian Server"
         "Setup Git Config"
@@ -110,6 +111,10 @@ install_script() {
         "Setup Raspberry Pi")
             echo -e "${GREEN}Running: curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup_raspberry_pi.sh | bash -s \"https://google.com\"${NC}"
             curl -sSL https://raw.githubusercontent.com/shivamashtikar/configs/main/setup_raspberry_pi.sh | bash -s "https://google.com"
+            ;;
+        "Setup Tmux (Vanila Config)")
+            echo -e "${GREEN}Running: curl -fsSL https://raw.githubusercontent.com/shivamashtikar/easy-tmux/main/tmux.conf.cloud -o ~/.tmux.conf && tmux source-file ~/.tmux.conf ${NC}"
+            curl -fsSL https://raw.githubusercontent.com/shivamashtikar/easy-tmux/main/tmux.conf.cloud -o ~/.tmux.conf && tmux source-file ~/.tmux.conf
             ;;
         "Setup Debian Server") local_script_instruction "setup-debian.sh" ;; 
         "Setup Git Config") local_script_instruction "setup-gitconfig.sh" ;; 
