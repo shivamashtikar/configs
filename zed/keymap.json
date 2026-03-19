@@ -7,14 +7,20 @@
 // from the command palette.
 [
   {
+    "context": "(Editor && vim_mode == insert) || Terminal || mode == single_line",
+    "bindings": {
+      "space": null,
+    },
+  },
+  {
     "context": "vim_operator == none && !VimWaiting && vim_mode != insert && !Terminal && mode != single_line",
     "bindings": {
       "space o": "file_finder::Toggle",
       "space w": "workspace::Save",
       "space q": "pane::CloseActiveItem",
       "space tab": "pane::AlternateFile",
-      "shift-j": "vim::PageDown",
-      "shift-k": "vim::PageUp",
+      "shift-j": "vim::ScrollDown",
+      "shift-k": "vim::ScrollUp",
       "ctrl-f": "vim::JoinLines",
       "shift-u": "vim::Redo",
       "space space": "project_panel::Toggle",
@@ -23,6 +29,7 @@
       "space g p p": "git::Pull",
       "space g p r": "git::PullRebase",
       "space g p u": "git::Push",
+      "space p": "projects::OpenRecent",
     },
   },
   {
@@ -44,6 +51,13 @@
       "cmd-g": "git_panel::Toggle",
       "cmd-b": "project_panel::Toggle",
       "cmd-q": "workspace::CloseWindow",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == visual && !menu && !Terminal",
+    "bindings": {
+      "shift-k": "editor::MoveLineUp",
+      "shift-j": "editor::MoveLineDown",
     },
   },
   {
