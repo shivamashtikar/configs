@@ -7,17 +7,13 @@
 // from the command palette.
 [
   {
-    "context": "(Editor && vim_mode == insert) || Terminal || mode == single_line",
-    "bindings": {
-      "space": null,
-    },
-  },
-  {
     "context": "vim_operator == none && !VimWaiting && vim_mode != insert && !Terminal && mode != single_line",
     "bindings": {
       "space o": "file_finder::Toggle",
       "space w": "workspace::Save",
-      "space q": "pane::CloseActiveItem",
+      "space q q": "pane::CloseActiveItem",
+      "space q w": ["workspace::SendKeystrokes", "escape : wq! enter"],
+      "space q a": "workspace::CloseAllDocks",
       "space tab": "pane::AlternateFile",
       "shift-j": "vim::ScrollDown",
       "shift-k": "vim::ScrollUp",
@@ -29,7 +25,19 @@
       "space g p p": "git::Pull",
       "space g p r": "git::PullRebase",
       "space g p u": "git::Push",
+      "space g g": "git::Diff",
+      "space s v": "pane::SplitHorizontal",
+      "space s s": "pane::SplitVertical",
+      "space s k": "pane::SplitAndMoveRight",
       "space p": "projects::OpenRecent",
+      "space y": [
+        "action::Sequence",
+        [
+          "editor::SelectLargerSyntaxNode",
+          "editor::Copy",
+          "editor::UndoSelection",
+        ],
+      ],
     },
   },
   {
