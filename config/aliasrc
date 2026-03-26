@@ -279,6 +279,7 @@ alias fdl='fdocker_logs'
 alias fds='fdocker_stop'
 alias fdr='fdocker_run'
 alias fdre='fdocker_restart'
+alias fssh='ssh $(grep -w "^Host" ~/.ssh/config | awk "{print \$2}" | fzf)'
 alias nv='NVIM_APPNAME=mini-nvim nvim'
 alias dps='docker ps'
 alias dex='docker exec -it'
@@ -296,7 +297,7 @@ alias gl='git pull'
 alias gst='git status'
 alias glo='git log --oneline --decorate'
 
-# Encrypt 
+# Encrypt
 # encrypt "text to encrypt" "secret"
 encrypt() { echo "$1" | openssl enc -aes-256-cbc -a -salt -pbkdf2 -pass pass:"$2"; }
 
@@ -306,11 +307,11 @@ decrypt() { echo "$1" | openssl enc -aes-256-cbc -a -d -pbkdf2 -pass pass:"$2"; 
 
 
 function t(){
-  SESSION=$(tmux ls | fzf | cut -d: -f1)
+  SESSION=$(tmux ls)
   if [[ -n "$SESSION" ]]; then
-    tmux a -t$SESSION
+    tmux a -t $(echo $SESSION | fzf | cut -d: -f1 )
   else
-    tmux 
+    tmux
   fi
 }
 
