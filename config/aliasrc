@@ -319,3 +319,61 @@ function git_disable_zsh_status(){
   git config --add oh-my-zsh.hide-status 1
   git config --add oh-my-zsh.hide-dirty 1
 }
+
+function cjv () {
+    # Select node with descriptive names
+    SELECTED_HOST=$(grep -w "^Host" ~/.ssh/config | awk "{print \$2}" | fzf --prompt="Select Node: ")
+
+    if [ -z "$SELECTED_HOST" ]; then
+        echo "No node selected"
+        return 1
+    fi
+
+    NODEIP=$(grep -A 3 -w "^Host $SELECTED_HOST" ~/.ssh/config | grep "HostName" | awk '{print $2}')
+
+    echo "Selected Node: $SELECTED_HOST ($NODEIP)"
+
+    # Check available ports and let user select
+    AVAILABLE_PORTS=("8000" "8001" "8080" "8083")
+
+
+    # Select port if multiple available
+    if [ ${#AVAILABLE_PORTS[@]} -eq 1 ]; then
+        PORT="${AVAILABLE_PORTS[0]}"
+        echo "Using port: $PORT"
+    else
+        PORT=$(printf '%s\n' "${AVAILABLE_PORTS[@]}" | fzf --prompt="Select Port: ")
+        if [ -z "$PORT" ]; then
+            echo "No port selected"
+            return 1
+        fi
+    fi
+
+    echo "Selected port: $PORT"
+
+    MODEL=$(curl -s -X GET \
+      "http://${NODEIP}:${PORT}/v1/models" \
+      -H 'accept: application/json' | jq -r '.data|.[].id' | fzf)
+    # Unset unwanted environment variables for this function scope
+
+    GEMINI_API_KEY="" \
+    GOOGLE_CLOUD_PROJECT="" \
+    GOOGLE_APPLICATION_CREDENTIALS="" \
+    CLAUDE_CODE_USE_VERTEX="" \
+    CLOUD_ML_REGION="" \
+    GOOGLE_VERTEX_PROJECT="" \
+    ANTHROPIC_VERTEX_PROJECT_ID="" \
+    ANTHROPIC_BASE_URL="http://${NODEIP}:$PORT/" \
+    ANTHROPIC_AUTH_TOKEN="$JUSPAY_API_KEY" \
+    ANTHROPIC_MODEL="$MODEL" \
+    ANTHROPIC_SMALL_FAST_MODEL="$MODEL" \
+    ANTHROPIC_DEFAULT_SONNET_MODEL="$MODEL" \
+    ANTHROPIC_DEFAULT_OPUS_MODEL="$MODEL" \
+    ANTHROPIC_DEFAULT_HAIKU_MODEL="$MODEL" \
+    CLAUDE_CODE_SUBAGENT_MODEL="$MODEL" \
+    DISABLE_INTERLEAVED_THINKING=true \
+    API_TIMEOUT_MS=600000 \
+    BASH_MAX_TIMEOUT_MS=300000 \
+    CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 \
+    claude --dangerously-skip-permissions "${@:1}"
+}
