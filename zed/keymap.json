@@ -20,6 +20,8 @@
       "ctrl-f": "vim::JoinLines",
       "shift-u": "vim::Redo",
       "space space": "project_panel::Toggle",
+      "space f j": "pane::DeploySearch",
+      "space f p": "pane::RevealInProjectPanel",
       "space g c o": "git::CheckoutBranch",
       "space g c c": "git::Commit",
       "space g p p": "git::Pull",
@@ -38,12 +40,41 @@
           "editor::UndoSelection",
         ],
       ],
+      "g f": "editor::OpenExcerpts",
+    },
+  },
+  // Empty pane, set of keybindings that are available when there is no active editor
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      // Open file finder
+      "space space": "file_finder::Toggle",
+      // Open recent project
+      "space p": "projects::OpenRecent",
     },
   },
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-n": "workspace::NewTerminal",
+      "alt-t": "workspace::NewTerminal",
+      "alt-w": "pane::CloseActiveItem",
+      "alt-=": "vim::GoToPreviousTab",
+    },
+  },
+  // File panel (netrw)
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "A": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "x": "project_panel::Cut",
+      "c": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      // Close project panel as project file panel on the right
+      "q": "workspace::ToggleLeftDock",
+      "space e": "workspace::ToggleLeftDock",
     },
   },
   {
@@ -72,6 +103,7 @@
     "context": "",
     "bindings": {
       "alt-f": "workspace::ToggleZoom",
+      "space f f": "file_finder::Toggle",
     },
   },
 ]

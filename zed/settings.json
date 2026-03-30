@@ -7,6 +7,43 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "centered_layout": {
+    "left_padding": 0.2
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_icon": true
+  },
+  "project_panel": {
+    "default_width": 260.0
+  },
+  "git_panel": {
+    "show_count_badge": true,
+    "file_icons": true,
+    "tree_view": true
+  },
+  "git": {
+    "inline_blame": {
+      "show_commit_summary": true,
+      "delay_ms": 500
+    }
+  },
+  "buffer_font_family": "FiraCode Nerd Font Mono",
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+  },
+  "use_smartcase_search": true,
+  "soft_wrap": "editor_width",
+  "which_key": {
+    "enabled": true,
+  },
+  "languages": {
+    "Diff": {
+      "soft_wrap": "editor_width",
+    },
+  },
+  "diff_view_style": "unified",
   "icon_theme": "Material Icon Theme",
   "telemetry": {
     "diagnostics": false,
@@ -17,10 +54,11 @@
   },
   "vim_mode": true,
   "terminal": {
+    "show_count_badge": false,
     "option_as_meta": true,
     "font_family": "FiraCode Nerd Font Mono",
     "blinking": "on",
-    "working_directory": "current_file_directory",
+    "working_directory": "current_project_directory",
     "env": {
       "EDITOR": "zed --wait",
     },
