@@ -160,3 +160,8 @@ vmap('<leader>let', ':Gen Make_Table<CR>')
 nvmap('<leader>lee', ':Gen Enhance_Code<CR>')
 nvmap('<leader>lr', ':Gen Review_Code<CR>')
 nmap('<leader>lg', ':Gen Generate<CR>')
+
+vim.keymap.set('n', '<M-p>', function()
+  vim.fn.system('tmux run-shell "~/.tmux/plugins/tmux-tiling-revamped/src/tiling.sh pick"')
+end, { silent = true })
+
