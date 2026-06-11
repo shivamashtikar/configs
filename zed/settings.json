@@ -7,29 +7,39 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "proxy": "",
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "cli_default_open_behavior": "existing_window",
   "centered_layout": {
-    "left_padding": 0.2
+    "left_padding": 0.2,
   },
   "title_bar": {
+    "show_branch_status_icon": true,
     "show_menus": false,
-    "show_branch_icon": true
   },
   "project_panel": {
-    "default_width": 260.0
+    "dock": "left",
+    "default_width": 260.0,
   },
   "git_panel": {
+    "dock": "left",
     "show_count_badge": true,
     "file_icons": true,
-    "tree_view": true
+    "tree_view": true,
   },
   "git": {
     "inline_blame": {
       "show_commit_summary": true,
-      "delay_ms": 500
-    }
+      "delay_ms": 500,
+    },
   },
   "buffer_font_family": "FiraCode Nerd Font Mono",
   "tabs": {
+    "close_position": "right",
     "file_icons": true,
     "git_status": true,
   },
@@ -44,7 +54,11 @@
     },
   },
   "diff_view_style": "unified",
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme",
+  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false,
@@ -69,6 +83,7 @@
   },
   "relative_line_numbers": "wrapped",
   "vim": {
+    "use_smartcase_find": true,
     "highlight_on_yank_duration": 100,
     "toggle_relative_line_numbers": true,
   },
@@ -77,5 +92,9 @@
   "tab_size": 2,
   "ui_font_size": 16,
   "buffer_font_size": 15,
-  "theme": "One Dark Pro",
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark Pro",
+  },
 }
